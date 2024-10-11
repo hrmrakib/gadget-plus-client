@@ -3,7 +3,6 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -160,7 +159,7 @@ const Footer = () => {
             "/payments/diners-club.png",
             "/payments/discover.jpeg",
           ].map((img, i) => (
-            <Image
+            <img
               key={i}
               className='border w-6 h-4 rounded-sm'
               src={img}

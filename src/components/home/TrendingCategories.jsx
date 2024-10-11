@@ -48,7 +48,7 @@ const trending = [
 ];
 
 const TrendingCategories = () => {
-  const scrollContainerRef = (useRef < HTMLDivElement) | (null > null);
+  const scrollContainerRef = useRef(null);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {

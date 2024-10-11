@@ -5,9 +5,8 @@ import Footer from "./../components/footer/Footer";
 
 const Root = () => {
   return (
-    <>
+    <div className='bg-[#080808]'>
       <header>
-        <TopBar />
         <Navbar />
       </header>
 
@@ -16,7 +15,7 @@ const Root = () => {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

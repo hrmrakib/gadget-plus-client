@@ -1,3 +1,250 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.t-shadow {
+  text-shadow: 93px -17px 3px rgba(116, 116, 116, 0.51);
+}
+
+/* scrollbar w/h zero */
+.scrollbar-zero::-webkit-scrollbar {
+  width: no;
+  height: 0;
+  background: none;
+}
+
+.scrollbar-zero::-webkit-scrollbar-thumb {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.scrollbar-zero::-webkit-scrollbar-track {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+/* btn hover */
+.shop-btn {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #2043f1;
+  border: none;
+  cursor: pointer;
+  margin: 0px 25px 15px;
+  min-width: 150px;
+}
+.shop-btn span {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 20px;
+  transition: 0.3s;
+}
+
+/*--- btn-1 ---*/
+.shop-btn::before {
+  background-color: rgb(28, 31, 30);
+  transition: 0.3s ease-out;
+}
+.shop-btn span {
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(28, 31, 30);
+  transition: 0.2s 0.1s;
+}
+.btn-1 span:hover {
+  color: rgb(28, 31, 30);
+  transition: 0.2s 0.1s;
+}
+
+/* hover-filled-slide-left */
+.btn.hover-filled-slide-left::before {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.btn.hover-filled-slide-left:hover::before {
+  width: 0%;
+}
+
+/* hero slide - package css */
+[class^="number-slide"],
+[class*=" number-slide"] {
+  /* background: grey; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 500;
+  height: 200px;
+  max-height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+.scene {
+  width: 260px;
+  height: 200px;
+  perspective: 1000px;
+  position: relative;
+}
+.scene .carousel.keen-slider {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  position: absolute;
+  transform: translateZ(-288px);
+  transform-style: preserve-3d;
+}
+.carousel__cell {
+  position: absolute;
+  /* width: 240px; */
+  left: 10px;
+  /* height: 200px; */
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* hero bounce area */
+.bounce {
+  animation: bounce 4s ease infinite;
+  animation-delay: 2s;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+.bounce2 {
+  animation: bounce2 3s ease infinite;
+}
+@keyframes bounce2 {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-40px);
+  }
+  60% {
+    transform: translateY(-20px);
+  }
+}
+
+/* trending categories */
+
+[class^="number-slide"],
+[class*=" number-slide"] {
+  /* background: grey; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 500;
+  height: 200px;
+  max-height: 100vh;
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  fill: #fff;
+  cursor: pointer;
+}
+
+.arrow--left {
+  left: 5px;
+}
+
+.arrow--right {
+  left: auto;
+  right: 5px;
+}
+
+.arrow--disabled {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+.navigation-wrapper {
+  position: relative;
+}
+
+.dots {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+.dot {
+  border: none;
+  width: 10px;
+  height: 10px;
+  background: #c5c5c5;
+  border-radius: 50%;
+  margin: 0 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dot:focus {
+  outline: none;
+}
+
+.dot.active {
+  background: #000;
+}
+
+.keen-slider {
+  transition: height 0.3s;
+}
+
+.keen-slider .keen-slider__slide {
+  min-height: auto !important;
+}
+
+/* hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

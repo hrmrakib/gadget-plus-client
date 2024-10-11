@@ -1,22 +1,14 @@
 import React, { useRef, useEffect } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
-import Image from "next/image";
+// import Drawer from "./Drawer";
 
-interface DrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
-  const drawerRef = useRef<HTMLDivElement>(null);
+const Drawer = ({ isOpen, onClose }) => {
+  const drawerRef = useRef(null);
 
   // Handle clicks outside the drawer to close it
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        drawerRef.current &&
-        !drawerRef.current.contains(event.target as Node)
-      ) {
+    const handleClickOutside = (event) => {
+      if (drawerRef.current && !drawerRef.current.contains(event.target)) {
         onClose();
       }
     };
@@ -75,7 +67,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
           <div className='overflow-y-scroll scrollbar-hide h-[420px]'>
             <div className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'>
               <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <Image
+                <img
                   className='size-10'
                   width={10}
                   height={10}
@@ -108,7 +100,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
             </div>
             <div className='mt-3 flex justify-between pb-2.5 border-b border-b-gray-800'>
               <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <Image
+                <img
                   className='size-10'
                   width={10}
                   height={10}
@@ -141,7 +133,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
             </div>
             <div className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'>
               <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <Image
+                <img
                   className='size-10'
                   width={10}
                   height={10}
@@ -174,7 +166,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
             </div>
             <div className='mt-3 flex justify-between pb-2.5 border-b border-b-gray-800'>
               <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <Image
+                <img
                   className='size-10'
                   width={10}
                   height={10}
