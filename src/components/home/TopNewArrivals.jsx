@@ -1,16 +1,16 @@
-import Image from "next/image";
-import React from "react";
 import { FaEye, FaHeart, FaPlus, FaStar } from "react-icons/fa";
 
 const TopNewArrivals = () => {
   return (
     <div className='w-[96%] mx-auto mt-20'>
-      <h2 className='text-3xl text-white t-shadow mb-8'>TOP NEW ARRIVALS</h2>
+      <h2 className='text-2xl md:text-3xl text-white t-shadow mb-8'>
+        TOP NEW ARRIVALS
+      </h2>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
         <div className='bg-[#1c1c1c] p-5 flex flex-col justify-between'>
           <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
-            <Image
+            <img
               className='h-[560px] w-full'
               src='/top-new-arrivals/headphone.webp'
               width={220}
@@ -45,7 +45,7 @@ const TopNewArrivals = () => {
         <div className='space-y-10'>
           <div className='bg-[#1c1c1c] p-5'>
             <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
-              <Image
+              <img
                 src='/ultramax-watch.avif'
                 width={220}
                 height={350}
@@ -76,7 +76,7 @@ const TopNewArrivals = () => {
           </div>
           <div className='bg-[#1c1c1c] p-5'>
             <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
-              <Image
+              <img
                 src='/ultramax-watch.avif'
                 width={220}
                 height={350}

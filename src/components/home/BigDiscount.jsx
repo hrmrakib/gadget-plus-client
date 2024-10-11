@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { MdAdd } from "react-icons/md";
 
@@ -21,7 +20,7 @@ const BigDiscount = () => {
       </div>
 
       <div className='mt-5'>
-        <Image
+        <img
           src='/iphone-15-pro-max2.jpg'
           width={900}
           height={200}

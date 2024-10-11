@@ -1,6 +1,3 @@
-import Image from "next/image";
-import React from "react";
-
 const CheckoutTheDiscount = () => {
   return (
     <div className='mt-20 flex items-center justify-around gap-10'>
@@ -12,7 +9,7 @@ const CheckoutTheDiscount = () => {
         <button className='shop-btn'>Shop Now</button>
       </div>
       <div>
-        <Image src='/mini-sound-box.webp' width={200} height={200} alt='box' />
+        <img src='/mini-sound-box.webp' width={200} height={200} alt='box' />
       </div>
     </div>
   );

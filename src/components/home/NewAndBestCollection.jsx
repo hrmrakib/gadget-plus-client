@@ -1,5 +1,3 @@
-import React from "react";
-
 const NewAndBestCollection = () => {
   return (
     <div className='mb-12 w-[96%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8'>

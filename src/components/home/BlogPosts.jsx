@@ -1,6 +1,5 @@
 import React from "react";
 import { baseURL } from "./../../utils/baseURL";
-import Image from "next/image";
 
 const getPosts = async () => {
   const res = await fetch(`${baseURL}/data/blog.json`);
@@ -17,9 +16,9 @@ const BlogPosts = async () => {
       <h2 className='text-3xl text-white t-shadow'>Blog Posts</h2>
 
       <div className='mt-12 grid grid-cols-3 gap-6'>
-        {posts?.map((post: any) => (
+        {posts?.map((post) => (
           <div key={post?.id} className='border'>
-            <Image
+            <img
               className='w-full h-60'
               src={post?.image}
               width={400}
