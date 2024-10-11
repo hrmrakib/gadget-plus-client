@@ -1,6 +1,5 @@
 import React from "react";
-import HeroCarousel from "@/components/header/HeroContent";
-import Image from "next/image";
+import HeroCarousel from "./HeroContent";
 
 const Hero = () => {
   return (

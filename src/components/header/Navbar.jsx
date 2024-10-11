@@ -1,11 +1,11 @@
 import React from "react";
 import TopBar from "./TopBar";
-import Link from "next/link";
 import { FaAngleDown } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { IoBagAddSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (

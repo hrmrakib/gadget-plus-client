@@ -1,10 +1,8 @@
-"use client";
 import React, { useEffect } from "react";
 import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import Image from "next/image";
 
-const carousel: KeenSliderPlugin = (slider) => {
+const carousel = (slider) => {
   const z = 300;
 
   function rotate() {
@@ -23,7 +21,7 @@ const carousel: KeenSliderPlugin = (slider) => {
   slider.on("detailsChanged", rotate);
 
   // Automatic sliding
-  let timeout: any;
+  let timeout;
   function autoSlide() {
     timeout = setTimeout(() => {
       slider.next();
@@ -36,22 +34,23 @@ const carousel: KeenSliderPlugin = (slider) => {
 };
 
 export default function HeroCarousel() {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>(
-    {
+  const [sliderRef] =
+    useKeenSlider <
+    HTMLDivElement >
+    ({
       loop: true,
       selector: ".carousel__cell",
       renderMode: "custom",
       mode: "free-snap",
     },
-    [carousel]
-  );
+    [carousel]);
 
   return (
     <div className='wrapper'>
       <div className='scene'>
         <div className='carousel keen-slider' ref={sliderRef}>
           <div className='carousel__cell number-slide1 '>
-            <Image
+            <img
               src='/iphone14vs15.jpg'
               width={350}
               height={350}
@@ -59,19 +58,19 @@ export default function HeroCarousel() {
             />
           </div>
           <div className='carousel__cell number-slide2'>
-            <Image src='/vivobook.avif' width={350} height={350} alt='iphone' />
+            <img src='/vivobook.avif' width={350} height={350} alt='iphone' />
           </div>
           <div className='carousel__cell number-slide3'>
-            <Image src='/watch.avif' width={350} height={350} alt='iphone' />
+            <img src='/watch.avif' width={350} height={350} alt='iphone' />
           </div>
           <div className='carousel__cell number-slide4'>
-            <Image src='/speaker.avif' width={350} height={350} alt='iphone' />
+            <img src='/speaker.avif' width={350} height={350} alt='iphone' />
           </div>
           <div className='carousel__cell number-slide5'>
-            <Image src='/headphone.png' width={350} height={350} alt='iphone' />
+            <img src='/headphone.png' width={350} height={350} alt='iphone' />
           </div>
           <div className='carousel__cell number-slide6'>
-            <Image src='/macbook.jpg' width={350} height={350} alt='iphone' />
+            <img src='/macbook.jpg' width={350} height={350} alt='iphone' />
           </div>
         </div>
       </div>
