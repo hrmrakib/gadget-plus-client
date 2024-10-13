@@ -7,9 +7,14 @@ import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { IoBagAddSharp } from "react-icons/io5";
 import Drawer from "../Drawer";
+import { blogLinks, pageLinks, productLinks } from "../../constants";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const carts = useSelector((state) => state.cart.carts);
+
+  console.log(carts);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -51,34 +56,16 @@ const Navbar = () => {
                 aria-orientation='vertical'
                 aria-labelledby='options-menu'
               >
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  iPhone 15 Pro
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  OnePlus 11
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  OPPO F23 Ultra
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Sumsang Galaxy
-                </Link>
+                {productLinks.map((link, i) => (
+                  <Link
+                    key={i}
+                    href='#'
+                    className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
+                    role='menuitem'
+                  >
+                    {link?.text}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -95,48 +82,16 @@ const Navbar = () => {
                 aria-orientation='vertical'
                 aria-labelledby='options-menu'
               >
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  About Us
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Contact
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  FAQ's
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Privacy & Policy
-                </Link>
-                <Link
-                  href='#'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Shipping & Return
-                </Link>
-                <Link
-                  href='/terms'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Terms & Condition
-                </Link>
+                {pageLinks.map((link, i) => (
+                  <Link
+                    key={i}
+                    href='#'
+                    className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
+                    role='menuitem'
+                  >
+                    {link?.text}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -153,20 +108,16 @@ const Navbar = () => {
                 aria-orientation='vertical'
                 aria-labelledby='options-menu'
               >
-                <Link
-                  href='blog'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Blog Page
-                </Link>
-                <Link
-                  href='/article'
-                  className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
-                  role='menuitem'
-                >
-                  Article Page
-                </Link>
+                {blogLinks.map((link, i) => (
+                  <Link
+                    key={i}
+                    href='blog'
+                    className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
+                    role='menuitem'
+                  >
+                    {link.text}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -191,7 +142,7 @@ const Navbar = () => {
           <div className='relative cursor-pointer' onClick={toggleDrawer}>
             <IoBagAddSharp />
             <span className='absolute w-4 h-4 -top-2 -right-2 rounded-full bg-blue-600 text-[12px] flex items-center justify-center'>
-              2
+              {carts.length || 0}
             </span>
           </div>
         </div>

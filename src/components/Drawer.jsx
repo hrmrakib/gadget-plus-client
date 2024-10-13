@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
-// import Drawer from "./Drawer";
+import { useSelector } from "react-redux";
 
 const Drawer = ({ isOpen, onClose }) => {
   const drawerRef = useRef(null);
+
+  const cartProducts = useSelector((state) => state.cart.carts);
 
   // Handle clicks outside the drawer to close it
   useEffect(() => {
@@ -65,138 +67,39 @@ const Drawer = ({ isOpen, onClose }) => {
           </p>
 
           <div className='overflow-y-scroll scrollbar-hide h-[420px]'>
-            <div className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'>
-              <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <img
-                  className='size-10'
-                  width={10}
-                  height={10}
-                  src='/headphone.jpg'
-                  alt=''
-                />
-              </div>
-              <div>
-                <h3 className='text-lg font-semibold'>
-                  Zebronics Bluetooth...
-                </h3>
-                <p>$210.00</p>
-                <p>
-                  <strong>Color:</strong> Gray
-                </p>
-                <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
-                  <button className='border-r-2 px-3 py-2 font-medium'>
-                    -
-                  </button>
-                  <span className='px-3 py-2'>22</span>
-                  <button className='border-l-2 px-3 py-2 font-medium'>
-                    +
-                  </button>
+            {cartProducts?.map((product) => (
+              <div className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'>
+                <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
+                  <img
+                    className='size-10'
+                    width={10}
+                    height={10}
+                    src={product?.img}
+                    alt=''
+                  />
+                </div>
+                <div>
+                  <h3 className='text-lg font-semibold'>{product?.title}</h3>
+                  <p>$210.00</p>
+                  <p>
+                    <strong>Color:</strong> Gray
+                  </p>
+                  <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
+                    <button className='border-r-2 px-3 py-2 font-medium'>
+                      -
+                    </button>
+                    <span className='px-3 py-2'>22</span>
+                    <button className='border-l-2 px-3 py-2 font-medium'>
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <FaDeleteLeft />
                 </div>
               </div>
-
-              <div>
-                <FaDeleteLeft />
-              </div>
-            </div>
-            <div className='mt-3 flex justify-between pb-2.5 border-b border-b-gray-800'>
-              <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <img
-                  className='size-10'
-                  width={10}
-                  height={10}
-                  src='/headphone.jpg'
-                  alt=''
-                />
-              </div>
-              <div>
-                <h3 className='text-lg font-semibold'>
-                  Zebronics Bluetooth...
-                </h3>
-                <p>$210.00</p>
-                <p>
-                  <strong>Color:</strong> Gray
-                </p>
-                <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
-                  <button className='border-r-2 px-3 py-2 font-medium'>
-                    -
-                  </button>
-                  <span className='px-3 py-2'>22</span>
-                  <button className='border-l-2 px-3 py-2 font-medium'>
-                    +
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <FaDeleteLeft />
-              </div>
-            </div>
-            <div className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'>
-              <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <img
-                  className='size-10'
-                  width={10}
-                  height={10}
-                  src='/headphone.jpg'
-                  alt=''
-                />
-              </div>
-              <div>
-                <h3 className='text-lg font-semibold'>
-                  Zebronics Bluetooth...
-                </h3>
-                <p>$210.00</p>
-                <p>
-                  <strong>Color:</strong> Gray
-                </p>
-                <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
-                  <button className='border-r-2 px-3 py-2 font-medium'>
-                    -
-                  </button>
-                  <span className='px-3 py-2'>22</span>
-                  <button className='border-l-2 px-3 py-2 font-medium'>
-                    +
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <FaDeleteLeft />
-              </div>
-            </div>
-            <div className='mt-3 flex justify-between pb-2.5 border-b border-b-gray-800'>
-              <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
-                <img
-                  className='size-10'
-                  width={10}
-                  height={10}
-                  src='/headphone.jpg'
-                  alt=''
-                />
-              </div>
-              <div>
-                <h3 className='text-lg font-semibold'>
-                  Zebronics Bluetooth...
-                </h3>
-                <p>$210.00</p>
-                <p>
-                  <strong>Color:</strong> Gray
-                </p>
-                <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
-                  <button className='border-r-2 px-3 py-2 font-medium'>
-                    -
-                  </button>
-                  <span className='px-3 py-2'>22</span>
-                  <button className='border-l-2 px-3 py-2 font-medium'>
-                    +
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <FaDeleteLeft />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -206,8 +109,8 @@ const Drawer = ({ isOpen, onClose }) => {
             <h3>Subtotal</h3>
           </div>
           <div className='px-2 flex items-center justify-between *:text-base'>
-            <p>18</p>
-            <p>$320</p>
+            <p>25</p>
+            <p>$5000</p>
           </div>
 
           <div className='mt-5 bottom-0 w-full flex'>

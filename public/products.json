@@ -1,12 +1,12 @@
 [
-    {
-        "title": "",
-        "category": "",
-        "price": 27,
-        "discountedPrice": 19,
-        "color": ["red", "black", "purple"],
-        "available": 21,
-        "brand": "Ws2"
-
-    }
+  {
+    "title": "",
+    "category": "",
+    "price": 27,
+    "discountedPrice": 19,
+    "color": ["red", "black", "purple"],
+    "available": 21,
+    "brand": "Ws2",
+    "collection": "new or best or null"
+  }
 ]
