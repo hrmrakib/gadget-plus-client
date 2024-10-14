@@ -1,4 +1,3 @@
-import React from "react";
 import { IoBasketOutline } from "react-icons/io5";
 import { IoHeartOutline } from "react-icons/io5";
 import { GoQuestion } from "react-icons/go";
@@ -7,27 +6,43 @@ import { SiLoopback } from "react-icons/si";
 import { GiCargoShip } from "react-icons/gi";
 import { BsEnvelopeCheck } from "react-icons/bs";
 import { LuCalendarClock } from "react-icons/lu";
-import ProductDescTab from "./ProductDescTab";
-import Image from "next/image";
+import { useParams } from "react-router-dom";
+import ProductDescTab from "../components/product/ProductDescTab";
+import { useQuery, gql } from "@apollo/client";
+
+const GET_PRODUCT = gql`
+    Get_Product {
+      product(_id: `${params.id}`) {
+        _id
+        title
+        price 
+        description
+      }
+    }
+  `;
 
 const ProductDetail = () => {
-  return (
+  const params = useParams();
+  
+  const {} =useQuery()
+
+  return ( 
     <div className='bg-[#080808]'>
       <div className='flex flex-col justify-center pl-10 w-full h-80 bg-[url("/trending/common-banner.webp")] *:text-white'>
-        <h3 className='font-medium'>Home / Ultra Max 2.01 Big Display</h3>
+        <h3 className='font-medium'>Home / {params?.title} </h3>
         <p className='mt-3 text-xl'>
-          A speaker description typically includes details about the
+          A {params?.title} description typically includes details about the
           individual's expertise, experience, and speaking style. It...
         </p>
       </div>
 
-      <div className='mt-12 pb-12 px-8 flex flex-col md:flex-row gap-10'>
-        <div className='bg-[#1c1c1c]'>
-          <Image
-            className='p-8'
+      <div className='w-full mt-12 pb-12 px-8 flex flex-col md:flex-row gap-10'>
+        <div className='bg-[#1c1c1c] w-1/2'>
+          <img
+            className='p-8 w-full'
             width={10}
             height={10}
-            src='/watch.webp'
+            src='/iphone.webp'
             alt='img'
           />
         </div>

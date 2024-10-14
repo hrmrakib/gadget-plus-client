@@ -88,7 +88,7 @@ const Drawer = ({ isOpen, onClose }) => {
                     <button className='border-r-2 px-3 py-2 font-medium'>
                       -
                     </button>
-                    <span className='px-3 py-2'>22</span>
+                    <span className='px-3 py-2'>1</span>
                     <button className='border-l-2 px-3 py-2 font-medium'>
                       +
                     </button>

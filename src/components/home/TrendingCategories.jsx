@@ -79,7 +79,7 @@ const TrendingCategories = () => {
         >
           {trending.map((item, i) => (
             <Link
-              href={`/collection/${item?.url}`}
+              to={`/collection/${item?.url}`}
               key={i}
               className='cursor-pointer'
             >

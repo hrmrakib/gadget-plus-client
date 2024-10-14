@@ -1,16 +1,14 @@
-"use client";
-
 import * as React from 'react';
 import {useState} from "react"
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
+import TabContext from '@mui/lab/TabContext'; 
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { IoMdStarOutline } from "react-icons/io";
-import HoverRating from "./HoverRating";
-
-export default function ProductDescTab() {
+// import HoverRating from "./HoverRating";
+ 
+export default function ProductDescTab() {        
   const [value, setValue] = useState('1');
   const [openReview, setOpenReview] = useState(false)
 
@@ -91,7 +89,9 @@ export default function ProductDescTab() {
           {openReview && <div className="">
             <h2 className="text-center">Write a review</h2>
             <p className="text-center my-3">Rating</p>
-            <HoverRating />
+
+            {/* <HoverRating />  */}
+
             <form className="md:w-[600px] mx-auto flex flex-col">
               <div className="flex flex-col gap-2 mt-4">
                 <label className="text-center" htmlFor="">Review Title</label>

@@ -6,35 +6,50 @@ import { Box } from "@mui/joy";
 import { radioClasses } from "@mui/joy/Radio";
 import Sheet from "@mui/joy/Sheet";
 import Done from "@mui/icons-material/Done";
-import React, { useEffect, useRef } from 'react'
+import { MdTableRows } from "react-icons/md";
+import { IoGridOutline } from "react-icons/io5";
+import React from "react";
+import { FaEye, FaHeart, FaPlus, FaStar } from "react-icons/fa";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import FilterDrawer from "../components/product/FilterDrawer";
 
 
-const FilterDrawer = ({isOpen, onClose}) => {
-    const drawerRef = useRef(null)
+const TrendingCollection = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [viewMode, setViewMode] = useState(true);
 
-    useEffect(()=> {
-        const handleClickOutside = (event) => {
-            if(drawerRef.current && !drawerRef.current.contains(event.target)) {
-                onClose()
-            }}
-            if(isOpen){
-                document.addEventListener("mousedown", handleClickOutside)
-            }else{
-                document.addEventListener("mousedown", handleClickOutside)
-            }
-            return ()=> {
-                document.addEventListener('mousedown', handleClickOutside)
-            }
-        
-    },[isOpen, onClose])
+  const params = useParams();
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
+
+  const trendingUpperCase =
+    params?.title.charAt(0).toUpperCase() + params?.title.slice(1);
 
   return (
-    <div ref={drawerRef} className={`fixed top-0 left-0 h-full z-50 w-64 bg-zinc-800 shadow-lg transform ${isOpen ? "translate-x-0": "-translate-x-full"} transition-transform duration-300 ease-in-out overflow-y-scroll`}>
+    <div className='bg-[#080808]'>
+      {/* Filter Drawer */}
+      <FilterDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
+
+      <div className='flex flex-col justify-center pl-10 w-full h-80 bg-[url("/trending/common-banner.webp")] *:text-white'>
+        <h3 className='font-medium'>Home / {trendingUpperCase}</h3>
+        <h3 className='text-3xl font-semibold mt-2'>{params?.title}</h3>
+        <p className='mt-3 text-xl'>
+          A {params?.title} description typically includes details about the
+          individual's expertise, experience, and speaking style. It...
+        </p>
+      </div>
+
+      {/*  */}
+      <div className='grid grid-cols-4 gap-10 py-16 px-6'>
         {/* filter */}
-        <div onClick={onClose} className="relative">
-        <h3 className="absolute top-1 right-2 text-red-400">Close</h3>
-        </div>
-        <div className='border border-gray-500 '>
+        <div className='hidden md:block col-span-1 border border-gray-500'>
           <div className='flex items-center gap-2 p-2.5 *:text-white text-lg lg:*:text-2xl border-b border-b-gray-500'>
             <HiOutlineAdjustmentsHorizontal />
             <h3>Filters</h3>
@@ -58,7 +73,10 @@ const FilterDrawer = ({isOpen, onClose}) => {
                   >
                     <Radio
                       value='in'
-                      sx={{ color: "white", fontSize:{sm:"12px", md:"16px"} }}
+                      sx={{
+                        color: "white",
+                        fontSize: { sm: "12px", md: "16px" },
+                      }}
                       label='In Stack'
                       variant='solid'
                     />
@@ -69,7 +87,10 @@ const FilterDrawer = ({isOpen, onClose}) => {
                   >
                     <Radio
                       value='out'
-                      sx={{ color: "white", fontSize: {sm: "12px", md:"16px"} }}
+                      sx={{
+                        color: "white",
+                        fontSize: { sm: "12px", md: "16px" },
+                      }}
                       label='Out of Stock'
                       variant='solid'
                     />
@@ -132,7 +153,10 @@ const FilterDrawer = ({isOpen, onClose}) => {
                   >
                     <Radio
                       value='in'
-                      sx={{ color: "white", fontSize: {sm: "12px", md:"16px"} }}
+                      sx={{
+                        color: "white",
+                        fontSize: { sm: "12px", md: "16px" },
+                      }}
                       label='Speaker'
                       variant='solid'
                     />
@@ -161,7 +185,10 @@ const FilterDrawer = ({isOpen, onClose}) => {
                   >
                     <Radio
                       value='in'
-                      sx={{ color: "white", fontSize: {sm: "12px", md:"16px"} }}
+                      sx={{
+                        color: "white",
+                        fontSize: { sm: "12px", md: "16px" },
+                      }}
                       label='Brand name 1'
                       variant='solid'
                     />
@@ -172,7 +199,10 @@ const FilterDrawer = ({isOpen, onClose}) => {
                   >
                     <Radio
                       value='out'
-                      sx={{ color: "white", fontSize: {sm: "12px", md:"16px"} }}
+                      sx={{
+                        color: "white",
+                        fontSize: { sm: "12px", md: "16px" },
+                      }}
                       label='Brand name 2'
                       variant='solid'
                     />
@@ -200,7 +230,7 @@ const FilterDrawer = ({isOpen, onClose}) => {
                 sx={{ gap: 2, flexWrap: "wrap", flexDirection: "row" }}
               >
                 {["primary", "neutral", "danger", "success", "warning"].map(
-                  (colore:any) => (
+                  (colore) => (
                     <Sheet
                       key={colore}
                       sx={{
@@ -218,7 +248,7 @@ const FilterDrawer = ({isOpen, onClose}) => {
                       <Radio
                         overlay
                         variant='solid'
-                        color={colore} 
+                        // color={colore}
                         checkedIcon={<Done />}
                         value={colore}
                         slotProps={{
@@ -232,7 +262,7 @@ const FilterDrawer = ({isOpen, onClose}) => {
                         }}
                         sx={{
                           "--joy-focus-outlineOffset": "4px",
-                          "--joy-palette-focusVisible": (theme:any) =>
+                          "--joy-palette-focusVisible": (theme) =>
                             theme.vars.palette[colore][500],
                           [`& .${radioClasses.action}.${radioClasses.focusVisible}`]:
                             {
@@ -265,7 +295,10 @@ const FilterDrawer = ({isOpen, onClose}) => {
                   >
                     <Radio
                       value='in'
-                      sx={{ color: "white", fontSize: {sm: "12px", md:"16px"} }}
+                      sx={{
+                        color: "white",
+                        fontSize: { sm: "12px", md: "16px" },
+                      }}
                       label='New'
                       variant='solid'
                     />
@@ -276,8 +309,159 @@ const FilterDrawer = ({isOpen, onClose}) => {
             </div>
           </div>
         </div>
-    </div>
-  )
-}
 
-export default FilterDrawer
+        {/* collection */}
+        <div className='col-span-4 md:col-span-3'>
+          <div className='flex justify-between items-center py-2 lg:py-3 px-2 lg:px-2.5 md:border border-gray-500'>
+            {/* filter for mobile */}
+            <div
+              onClick={toggleDrawer}
+              className='flex md:hidden items-center gap-2 p-2.5 *:text-white text-lg lg:*:text-2xl border border-gray-500'
+            >
+              <HiOutlineAdjustmentsHorizontal />
+            </div>
+
+            {/* products header filter */}
+            <div className='flex items-center gap-2 *:text-white'>
+              <div
+                onClick={() => setViewMode(true)}
+                className={`${
+                  viewMode && "bg-[#262626]"
+                } border p-2 border-gray-600 rounded-sm cursor-pointer`}
+              >
+                <IoGridOutline />
+              </div>
+              <div
+                onClick={() => setViewMode(false)}
+                className={`${
+                  !viewMode && "bg-[#262626]"
+                } border p-2 border-gray-600 rounded-sm cursor-pointer`}
+              >
+                <MdTableRows />
+              </div>
+
+              <p className='hidden md:block'>
+                <span className='font-semibold'>5</span> products viewed
+              </p>
+            </div>
+
+            <div className='hidden md:block'>
+              <span className='text-white '>Sort by:</span>
+              <select
+                className='bg-[#080808] border border-gray-600 ml-4 text-white outline-none p-2'
+                id='dropdown'
+              >
+                <option value='option1'>Best Selling</option>
+                <option value='option2'>Alphabetically, A - Z</option>
+                <option value='option2'>Alphabetically, Z - A</option>
+                <option value='option3'>Price, high to low</option>
+                <option value='option3'>Price, low to high</option>
+                <option value='option3'>Date, old to new</option>
+                <option value='option3'>Date, new to old</option>
+              </select>
+            </div>
+          </div>
+
+          {/* products - cloumn view*/}
+          {viewMode && (
+            <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
+              {[1, 2, 3].map((v, i) => (
+                <div key={i} className='bg-[#1c1c1c] p-5'>
+                  <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
+                    <img
+                      src='/ultramax-watch.avif'
+                      className='w-full h-60 lg:h-72'
+                      width={220}
+                      height={350}
+                      alt='ultra'
+                    />
+                    <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+                      <FaPlus />
+                      Add to Cart
+                    </button>
+                  </div>
+
+                  <h2 className='text-2xl text-white my-2'>
+                    Ultra max 2.01 Big Diaplay
+                  </h2>
+                  <div className='flex items-center gap-1 *:text-orange-500'>
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                  </div>
+                  <h3 className='text-2xl text-red-700 font-semibold my-2'>
+                    $56.00
+                  </h3>
+                  <hr />
+                  <div className='flex items-center justify-center my-2 gap-5 *:text-blue-700 *:text-lg'>
+                    <FaHeart />
+                    <FaEye />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* products - row view*/}
+          {!viewMode && (
+            <div className='mt-10 grid grid-cols-1 gap-10'>
+              {[1, 2, 3].map((v, i) => (
+                <div
+                  key={i}
+                  className='bg-[#1c1c1c] p-5 flex flex-col lg:flex-row items-center justify-between gap-10'
+                >
+                  <div className='flex flex-col lg:flex-row items-center lg:items-start gap-7'>
+                    <div className='bg-[#262626] w-60 h-60'>
+                      <img
+                        src='/computer.jpg'
+                        className='w-full h-full p-6 zooming'
+                        width={220}
+                        height={350}
+                        alt='ultra'
+                      />
+                    </div>
+                    <div className='max-w-80'>
+                      <h2 className='text-2xl text-white font-semibold my-2'>
+                        Ultra max 2.01 Big Diaplay
+                      </h2>
+                      <p className='text-white mt-2'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Id provident, explicabo sequi mollitia voluptatem earum!
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className='flex items-center gap-1 *:text-orange-500'>
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                    </div>
+                    <h3 className='text-2xl text-red-700 font-semibold my-2'>
+                      $56.00
+                    </h3>
+                    <hr />
+                    <div className='flex items-center justify-center my-2 gap-5 *:text-blue-700 *:text-lg'>
+                      <FaHeart />
+                      <FaEye />
+                    </div>
+                    <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+                      <FaPlus />
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TrendingCollection;
