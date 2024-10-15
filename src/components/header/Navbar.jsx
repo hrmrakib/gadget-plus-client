@@ -140,14 +140,14 @@ const Navbar = () => {
           <div>
             <FaRegUser />
           </div> */}
-          <div className='relative'>
+          <Link to={"/page/wishlist"} className='relative'>
             <FaRegHeart />
             <span
               className={`absolute w-4 h-4 -top-2 -right-2 rounded-full bg-blue-600 text-[12px] flex items-center justify-center`}
             >
               {favorites.length || 0}
             </span>
-          </div>
+          </Link>
           <div className='relative cursor-pointer' onClick={toggleDrawer}>
             <IoBagAddSharp />
             <span className='absolute w-4 h-4 -top-2 -right-2 rounded-full bg-blue-600 text-[12px] flex items-center justify-center'>

@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { FaEye, FaPlus, FaStar } from "react-icons/fa";
 import { useQuery, gql } from "@apollo/client";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
 import { AiOutlineHeart } from "react-icons/ai";
+import { addFavorite } from "../../features/favorite/favoriteSlice";
+import { errorToast, successToast } from "../toast/toast";
 
 const GET_PRODUCTS = gql`
   query Get_Products {
@@ -20,21 +22,30 @@ const GET_PRODUCTS = gql`
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
+  const message = useSelector((state) => state.favorite.message);
   const { loading, error, data } = useQuery(GET_PRODUCTS);
+
+  if (loading) return <div>loading ....</div>;
+  if (error) return <div>{error?.message}</div>;
 
   const handleAddToCard = (product) => {
     dispatch(addToCart(product));
   };
 
-  if(loading) return <div>loading ....</div>
-  if(error) return <div>{error?.message}</div>
+  const handleFavorite = (product) => {
+    dispatch(addFavorite(product));
+    if (message) {
+      return errorToast("Already added!");
+    }
+    successToast("Add to Favorite");
+  };
 
   return (
     <section className='w-[96%] mx-auto mt-20'>
       <h2 className='text-3xl text-white t-shadow mb-8'>TrendingProducts</h2>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
-        {data?.products?.map((product, i) => (
+        {data?.products?.map((product) => (
           <div key={product?._id} className='bg-[#1c1c1c] p-5'>
             <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
               <Link to={`/product/${product?._id}`}>
@@ -66,7 +77,10 @@ const TrendingProducts = () => {
             <h3 className='text-2xl text-red-700 font-semibold my-2'>$56.00</h3>
             <hr />
             <div className='flex items-center justify-evenly mt-4 gap-5 *:text-blue-700 *:text-lg'>
-              <AiOutlineHeart className='text-lg cursor-pointer' />
+              <AiOutlineHeart
+                onClick={() => handleFavorite(product)}
+                className='text-lg cursor-pointer'
+              />
               <Link to={`/product/${product?._id}`}>
                 <FaEye className='text-2xl cursor-pointer' />
               </Link>

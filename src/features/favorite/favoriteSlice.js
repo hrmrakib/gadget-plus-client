@@ -13,13 +13,14 @@ const favoriteSlice = createSlice({
       const isExist = state.favorites.find((fav) => {
         return fav._id === action.payload._id;
       });
+
       if (isExist) {
         state.message = true;
         return;
       } else {
-        state.message = false;
         state.favorites.push(action.payload);
       }
+      state.message = false;
     },
     deleteFavorite: () => {},
   },

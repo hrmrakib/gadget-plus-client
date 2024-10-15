@@ -3,6 +3,7 @@ import Root from "./../layouts/Root";
 import Home from "../pages/Home";
 import TrendingCollection from "../pages/TrendingCollection";
 import ProductDetail from "../pages/ProductDetail";
+import Wishlist from "../components/wishlist/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: `/product/:id`,
         element: <ProductDetail />,
+      },
+      {
+        path: `/page/wishlist`,
+        element: <Wishlist />,
       },
     ],
   },
