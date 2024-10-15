@@ -13,8 +13,7 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const carts = useSelector((state) => state.cart.carts);
-
-  console.log(carts);
+  const favorites = useSelector((state) => state.favorite.favorites);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -23,6 +22,8 @@ const Navbar = () => {
   const closeDrawer = () => {
     setIsDrawerOpen(false);
   };
+
+  console.log("navbar", favorites);
 
   return (
     <nav className='w-full fixed top-0 z-50'>
@@ -131,18 +132,20 @@ const Navbar = () => {
 
         {/* search, user, cart */}
         <div className='flex items-center gap-5 *:text-lg *:text-white'>
-          <div>
+          {/* TODO: Work later */}
+
+          {/* <div>
             <IoSearchOutline />
           </div>
           <div>
             <FaRegUser />
-          </div>
+          </div> */}
           <div className='relative'>
             <FaRegHeart />
             <span
               className={`absolute w-4 h-4 -top-2 -right-2 rounded-full bg-blue-600 text-[12px] flex items-center justify-center`}
             >
-              5
+              {favorites.length || 0}
             </span>
           </div>
           <div className='relative cursor-pointer' onClick={toggleDrawer}>

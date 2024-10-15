@@ -3,6 +3,8 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const Drawer = ({ isOpen, onClose }) => {
+  const carts = useSelector((state) => state.cart.carts);
+
   const drawerRef = useRef(null);
 
   const cartProducts = useSelector((state) => state.cart.carts);
@@ -61,10 +63,14 @@ const Drawer = ({ isOpen, onClose }) => {
         </div>
 
         <div className='px-4 py-2'>
-          <p className='pb-1.5 mb-2.5 border-b border-gray-700'>
-            <strong>Congrats!</strong> You are eligible for{" "}
-            <strong>FREE Shipping</strong>
-          </p>
+          {carts.length ? (
+            <p className='pb-1.5 mb-2.5 border-b border-gray-700'>
+              <strong>Congrats!</strong> You are eligible for{" "}
+              <strong>FREE Shipping</strong>
+            </p>
+          ) : (
+            <p>Add to Cart</p>
+          )}
 
           <div className='overflow-y-scroll scrollbar-hide h-[420px]'>
             {cartProducts?.map((product) => (

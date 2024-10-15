@@ -10,6 +10,10 @@ import { LuCalendarClock } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import ProductDescTab from "../components/product/ProductDescTab";
 import { useQuery, gql } from "@apollo/client";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
+import { errorToast, successToast } from "../components/toast/toast";
+import { addFavorite } from "../features/favorite/favoriteSlice";
 
 const GET_PRODUCT = gql`
   query GetProduct($id: ID!) {
@@ -28,6 +32,8 @@ const GET_PRODUCT = gql`
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.favorite.message);
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { id: id },
@@ -35,6 +41,18 @@ const ProductDetail = () => {
 
   if (loading) <span>loading....</span>;
   if (error) <span>{error?.message}</span>;
+
+  const handleAddToCard = (product) => {
+    dispatch(addToCart(product));
+    successToast("Successfully, add to cart");
+  };
+  const handleFavorite = (product) => {
+    dispatch(addFavorite(product));
+    if (message) {
+      return errorToast("Already added!");
+    }
+    successToast("Add to Favorite");
+  };
 
   return (
     <div className='bg-[#080808]'>
@@ -82,14 +100,20 @@ const ProductDetail = () => {
               <span className='px-3 py-2'>1</span>
               <button className='border-l-2 px-3 py-2.5 font-medium'>+</button>
             </div>
-            <button className='text-white bg-blue-500 py-2.5 px-3 flex items-center gap-2'>
+            <button
+              onClick={() => handleAddToCard(data?.product)}
+              className='text-white bg-blue-500 py-2.5 px-3 flex items-center gap-2'
+            >
               <IoBasketOutline />
               Add to Cart
             </button>
             <button className='text-white bg-[#1c1c1c] py-2.5 px-4'>
               Buy it now
             </button>
-            <div className='border py-2.5 px-2.5 cursor-pointer'>
+            <div
+              onClick={() => handleFavorite(data?.product)}
+              className='border py-2.5 px-2.5 cursor-pointer'
+            >
               <IoHeartOutline className='text-white text-lg' />
             </div>
           </div>
