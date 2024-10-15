@@ -8,7 +8,8 @@
     "brand": "Apple",
     "category": "laptop",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Dell XPS 13",
@@ -19,7 +20,8 @@
     "brand": "Dell",
     "category": "laptop",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "HP Envy 15",
@@ -30,7 +32,8 @@
     "brand": "HP",
     "category": "laptop",
     "orderCount": 1,
-    "collectionType": ""
+    "collectionType": "",
+    "stock": 4
   },
   {
     "title": "Lenovo ThinkPad X1 Carbon",
@@ -41,7 +44,8 @@
     "brand": "Lenovo",
     "category": "laptop",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Asus ZenBook 14",
@@ -52,7 +56,8 @@
     "brand": "Asus",
     "category": "laptop",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 0
   },
   {
     "title": "Apple iPhone 15 Pro",
@@ -63,7 +68,8 @@
     "brand": "Apple",
     "category": "iPhone",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Samsung Galaxy S23 Ultra",
@@ -74,7 +80,8 @@
     "brand": "Samsung",
     "category": "iPhone",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Google Pixel 7 Pro",
@@ -85,7 +92,8 @@
     "brand": "Google",
     "category": "iPhone",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 0
   },
   {
     "title": "OnePlus 11",
@@ -96,7 +104,8 @@
     "brand": "OnePlus",
     "category": "iPhone",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Sony Xperia 5 IV",
@@ -107,7 +116,8 @@
     "brand": "Sony",
     "category": "iPhone",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 0
   },
   {
     "title": "Apple Watch Series 8",
@@ -118,7 +128,8 @@
     "brand": "Apple",
     "category": "smartwatch",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 0
   },
   {
     "title": "Samsung Galaxy Watch 5",
@@ -129,7 +140,8 @@
     "brand": "Samsung",
     "category": "smartwatch",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Garmin Forerunner 955",
@@ -140,7 +152,8 @@
     "brand": "Garmin",
     "category": "smartwatch",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Fitbit Sense 2",
@@ -151,7 +164,8 @@
     "brand": "Fitbit",
     "category": "smartwatch",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Xiaomi Mi Watch",
@@ -162,7 +176,8 @@
     "brand": "Xiaomi",
     "category": "smartwatch",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Sony WH-1000XM5",
@@ -173,7 +188,8 @@
     "brand": "Sony",
     "category": "headphone",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Bose QuietComfort 45",
@@ -184,7 +200,8 @@
     "brand": "Bose",
     "category": "headphone",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 0
   },
   {
     "title": "Apple AirPods Max",
@@ -195,7 +212,8 @@
     "brand": "Apple",
     "category": "headphone",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Sennheiser HD 660S",
@@ -206,7 +224,8 @@
     "brand": "Sennheiser",
     "category": "headphone",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Jabra Elite 85h",
@@ -217,7 +236,8 @@
     "brand": "Jabra",
     "category": "headphone",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "JBL Charge 5",
@@ -228,7 +248,8 @@
     "brand": "JBL",
     "category": "speaker",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 0
   },
   {
     "title": "Bose SoundLink Revolve+ II",
@@ -239,7 +260,8 @@
     "brand": "Bose",
     "category": "speaker",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Sonos Move",
@@ -250,7 +272,8 @@
     "brand": "Sonos",
     "category": "speaker",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Ultimate Ears MEGABOOM 3",
@@ -261,7 +284,8 @@
     "brand": "Ultimate Ears",
     "category": "speaker",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Marshall Emberton",
@@ -272,7 +296,8 @@
     "brand": "Marshall",
     "category": "speaker",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Apple AirPods Pro 2",
@@ -283,7 +308,8 @@
     "brand": "Apple",
     "category": "airpod",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Samsung Galaxy Buds 2 Pro",
@@ -294,7 +320,8 @@
     "brand": "Samsung",
     "category": "airpod",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 0
   },
   {
     "title": "Sony WF-1000XM4",
@@ -305,7 +332,8 @@
     "brand": "Sony",
     "category": "airpod",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   },
   {
     "title": "Jabra Elite 7 Pro",
@@ -316,7 +344,8 @@
     "brand": "Jabra",
     "category": "airpod",
     "orderCount": 1,
-    "collectionType": "best"
+    "collectionType": "best",
+    "stock": 4
   },
   {
     "title": "Beats Fit Pro",
@@ -327,6 +356,7 @@
     "brand": "Beats",
     "category": "airpod",
     "orderCount": 1,
-    "collectionType": "new"
+    "collectionType": "new",
+    "stock": 4
   }
 ]

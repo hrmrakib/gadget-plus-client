@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterDrawer from "../components/product/FilterDrawer";
 import { gql, useQuery } from "@apollo/client";
+import TrendingProductCard from "./TrendingProductCard";
 
 const GET_PRODUCTS_CATEGORY = gql`
   query GetProductsByCategory($category: String!) {
@@ -32,9 +33,18 @@ const GET_PRODUCTS_CATEGORY = gql`
 const TrendingCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState(true);
+  const [filterProduct, setFilterProudct] = useState(null);
+  const [filters, setFilters] = useState({
+    color: '',
+    brand: '',
+    inStock: false,
+    minPrice: '',
+    maxPrice: ''
+  });
+
   const { category } = useParams();
 
-console.log(category)
+console.log(filters)
 
   const { loading, error, data, refetch } = useQuery(GET_PRODUCTS_CATEGORY, {
     variables: { category:category }
@@ -42,8 +52,6 @@ console.log(category)
 
   if(loading) return <div>loading ..........</div>
   console.log(error?.message)
-
-  console.log(data && data)
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -53,16 +61,13 @@ console.log(category)
     setIsDrawerOpen(false);
   };
 
-  // const trendingUpperCase =
-  // category.charAt(0).toUpperCase() + category.slice(1);
-
   return (
     <div className='bg-[#080808]'>
       {/* Filter Drawer */}
       <FilterDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
 
       <div className='flex flex-col justify-center pl-10 w-full h-80 bg-[url("/trending/common-banner.webp")] *:text-white'>
-        {/* <h3 className='font-medium'>Home / {trendingUpperCase}</h3> */}
+        <h3 className='font-medium'>Home / {category}</h3>
         <h3 className='text-3xl font-semibold mt-2'>{category}</h3>
         <p className='mt-3 text-xl'>
           A {category} description typically includes details about the
@@ -72,8 +77,9 @@ console.log(category)
 
       {/*  */}
       <div className='grid grid-cols-4 gap-10 py-16 px-6'>
+        
         {/* filter */}
-        <div className='hidden md:block col-span-1 border border-gray-500'>
+        <div className='hidden md:block h-max col-span-1 border border-gray-500'>
           <div className='flex items-center gap-2 p-2.5 *:text-white text-lg lg:*:text-2xl border-b border-b-gray-500'>
             <HiOutlineAdjustmentsHorizontal />
             <h3>Filters</h3>
@@ -93,6 +99,7 @@ console.log(category)
               <FormControl>
                 <RadioGroup defaultValue='in' name='radio-buttons-group'>
                   <Box
+                  onClick={()=> setFilters('')}
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Radio
@@ -204,34 +211,25 @@ console.log(category)
             <div className=''>
               <FormControl>
                 <RadioGroup name='radio-buttons-group'>
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  {data?.productByCategories?.map((product)=> (
+                    <Box
+                    key={product?._id}
+                    sx={{ display: "flex", justifyContent: "space-between", marginTop:"5px" }}
                   >
                     <Radio
-                      value='in'
+                      value={product?.brand}
                       sx={{
                         color: "white",
                         fontSize: { sm: "12px", md: "16px" },
                       }}
-                      label='Brand name 1'
+                      label={product?.brand}
                       variant='solid'
                     />
-                    <span className='text-white'>5</span>
+                    <span className='text-white'>{product?.brand === product?.brand.length}</span>
                   </Box>
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Radio
-                      value='out'
-                      sx={{
-                        color: "white",
-                        fontSize: { sm: "12px", md: "16px" },
-                      }}
-                      label='Brand name 2'
-                      variant='solid'
-                    />
-                    <span className='text-white'>2</span>
-                  </Box>
+                  ))
+                    }
+                  
                 </RadioGroup>
               </FormControl>
             </div>
@@ -365,7 +363,7 @@ console.log(category)
               </div>
 
               <p className='hidden md:block'>
-                <span className='font-semibold'>5</span> products viewed
+                <span className='font-semibold'>{data?.productByCategories.length}</span> products viewed
               </p>
             </div>
 
@@ -386,101 +384,11 @@ console.log(category)
             </div>
           </div>
 
-          {/* products - cloumn view*/}
-          {viewMode && (
-            <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
-              {data?.productByCategories?.map((product) => (
-                <div key={product?._id} className='bg-[#1c1c1c] p-5'>
-                  <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
-                    <img
-                      src={product?.img}
-                      className='w-full h-60 lg:h-72'
-                      width={220}
-                      height={350}
-                      alt='ultra'
-                    />
-                    <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
-                      <FaPlus />
-                      Add to Cart
-                    </button>
-                  </div>
-
-                  <h2 className='text-2xl text-white my-2'>
-                    {product?.title}
-                  </h2>
-                  <div className='flex items-center gap-1 *:text-orange-500'>
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
-                  <h3 className='text-2xl text-red-700 font-semibold my-2'>
-                    ${product?.price}
-                  </h3>
-                  <hr />
-                  <div className='flex items-center justify-center my-2 gap-5 *:text-blue-700 *:text-lg'>
-                    <FaHeart />
-                    <FaEye />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* products - row view*/}
-          {!viewMode && (
-            <div className='mt-10 grid grid-cols-1 gap-10'>
-              {data?.productByCategories?.map((product) => (
-                <div
-                  key={product?._id}
-                  className='bg-[#1c1c1c] p-5 flex flex-col lg:flex-row items-center justify-between gap-10'
-                >
-                  <div className='flex flex-col lg:flex-row items-center lg:items-start gap-7'>
-                    <div className='bg-[#262626] w-60 h-60'>
-                      <img
-                        src={product?.img}
-                        className='w-full h-full p-6 zooming'
-                        width={220}
-                        height={350}
-                        alt='ultra'
-                      />
-                    </div>
-                    <div className='max-w-80'>
-                      <h2 className='text-2xl text-white font-semibold my-2'>
-                        {product?.title}
-                      </h2>
-                      <p className='text-white mt-2'>
-                        {product?.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className='flex items-center gap-1 *:text-orange-500'>
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                    </div>
-                    <h3 className='text-2xl text-red-700 font-semibold my-2'>
-                      ${product?.price}
-                    </h3>
-                    <hr />
-                    <div className='flex items-center justify-center my-2 gap-5 *:text-blue-700 *:text-lg'>
-                      <FaHeart />
-                      <FaEye />
-                    </div>
-                    <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
-                      <FaPlus />
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className={`mt-10 grid ${viewMode ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3": "grid-cols-1"} gap-10`}>
+            {data?.productByCategories?.map((product) => (
+              <TrendingProductCard key={product?._id} product={product} viewMode={viewMode} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

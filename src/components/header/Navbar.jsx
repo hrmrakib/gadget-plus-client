@@ -44,12 +44,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className='relative group'>
-            <li className="flex items-center gap-1 cursor-pointer relative text-sm text-gray-100 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-width after:duration-500 after:ease-in-out hover:after:w-full">
-              Products
+            <li className='flex items-center gap-1 cursor-pointer text-sm text-gray-100 relative'>
+              <span className="relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-all after:duration-500 after:ease-in-out group-hover:after:w-full">
+                Products
+              </span>
               <FaAngleDown className='transition-transform duration-400 ease-in-out group-hover:rotate-180' />
             </li>
 
-            <div className='z-50 absolute mt-5 w-40 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+            <div className='absolute z-50 w-40 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300'>
               <div
                 className='py-1 pl-2'
                 role='menu'
@@ -60,7 +62,7 @@ const Navbar = () => {
                   <Link
                     key={i}
                     href='#'
-                    className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
+                    className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
                     {link?.text}
@@ -70,12 +72,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className='relative group'>
-            <li className="flex items-center gap-1 cursor-pointer relative text-sm text-gray-100 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-width after:duration-500 after:ease-in-out hover:after:w-full">
-              Pages
+            <li className='flex items-center gap-1 cursor-pointer text-sm text-gray-100 relative'>
+              <span className="relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-all after:duration-500 after:ease-in-out group-hover:after:w-full">
+                Pages
+              </span>
               <FaAngleDown className='transition-transform duration-400 ease-in-out group-hover:rotate-180' />
             </li>
 
-            <div className='z-50 absolute mt-5 w-40 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+            <div className='absolute z-50 w-40 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300'>
               <div
                 className='py-1 pl-2'
                 role='menu'
@@ -86,7 +90,7 @@ const Navbar = () => {
                   <Link
                     key={i}
                     href='#'
-                    className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
+                    className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
                     {link?.text}
@@ -96,12 +100,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className='relative group'>
-            <li className="flex items-center gap-1 cursor-pointer relative text-sm text-gray-100 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-width after:duration-500 after:ease-in-out hover:after:w-full">
-              Blog
+            <li className='flex items-center gap-1 cursor-pointer text-sm text-gray-100 relative'>
+              <span className="relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-all after:duration-500 after:ease-in-out group-hover:after:w-full">
+                Blog
+              </span>
               <FaAngleDown className='transition-transform duration-400 ease-in-out group-hover:rotate-180' />
             </li>
 
-            <div className='z-50 absolute mt-5 w-40 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+            <div className='absolute z-50 w-40 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300'>
               <div
                 className='py-1 pl-2'
                 role='menu'
@@ -111,11 +117,11 @@ const Navbar = () => {
                 {blogLinks.map((link, i) => (
                   <Link
                     key={i}
-                    href='blog'
-                    className='inline-block px-4 py-2 text-sm text-white hover:text-blue-500'
+                    href='#'
+                    className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
-                    {link.text}
+                    {link?.text}
                   </Link>
                 ))}
               </div>
