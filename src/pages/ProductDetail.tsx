@@ -1,3 +1,4 @@
+import React from "react";
 import { IoBasketOutline } from "react-icons/io5";
 import { IoHeartOutline } from "react-icons/io5";
 import { GoQuestion } from "react-icons/go";
@@ -11,27 +12,35 @@ import ProductDescTab from "../components/product/ProductDescTab";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_PRODUCT = gql`
-    Get_Product {
-      product(_id: `${params.id}`) {
-        _id
-        title
-        price 
-        description
-      }
+  query GetProduct($id: ID!) {
+    product(_id: $id) {
+      _id
+      title
+      price
+      description
+      img
+      color
+      brand
+      category
     }
-  `;
+  }
+`;
 
 const ProductDetail = () => {
-  const params = useParams();
-  
-  const {} =useQuery()
+  const {id} = useParams();
+
+  const { loading, error, data, refetch } =useQuery(GET_PRODUCT, {
+    variables: {id}
+  });
+
+  console.log(data && data)
 
   return ( 
     <div className='bg-[#080808]'>
       <div className='flex flex-col justify-center pl-10 w-full h-80 bg-[url("/trending/common-banner.webp")] *:text-white'>
-        <h3 className='font-medium'>Home / {params?.title} </h3>
+        <h3 className='font-medium'>Home / "title" </h3>
         <p className='mt-3 text-xl'>
-          A {params?.title} description typically includes details about the
+          A "titel" description typically includes details about the
           individual's expertise, experience, and speaking style. It...
         </p>
       </div>

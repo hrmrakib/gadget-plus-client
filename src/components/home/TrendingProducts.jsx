@@ -19,12 +19,15 @@ const GET_PRODUCTS = gql`
 `;
 
 const TrendingProducts = () => {
-  const { loading, error, data, refetch } = useQuery(GET_PRODUCTS);
   const dispatch = useDispatch();
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
 
   const handleAddToCard = (product) => {
     dispatch(addToCart(product));
   };
+
+  if(loading) return <div>loading ....</div>
+  if(error) return <div>{error?.message}</div>
 
   return (
     <section className='w-[96%] mx-auto mt-20'>

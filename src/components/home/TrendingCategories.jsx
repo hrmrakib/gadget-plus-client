@@ -7,7 +7,7 @@ const trending = [
     id: 1,
     name: "iPhone",
     img: "/trending/iphone.webp",
-    url: "mobile",
+    url: "iPhone",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const trending = [
     id: 3,
     name: "headphones",
     img: "/trending/headphones.avif",
-    url: "headphones",
+    url: "headphone",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ const trending = [
     id: 5,
     name: "airpods",
     img: "/trending/airpods.webp",
-    url: "airpods",
+    url: "airpod",
   },
   {
     id: 6,

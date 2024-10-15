@@ -8,18 +8,42 @@ import Sheet from "@mui/joy/Sheet";
 import Done from "@mui/icons-material/Done";
 import { MdTableRows } from "react-icons/md";
 import { IoGridOutline } from "react-icons/io5";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaEye, FaHeart, FaPlus, FaStar } from "react-icons/fa";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterDrawer from "../components/product/FilterDrawer";
+import { gql, useQuery } from "@apollo/client";
 
+const GET_PRODUCTS_CATEGORY = gql`
+  query GetProductsByCategory($category: String!) {
+    productByCategories(category: $category) {
+      _id
+      title
+      price
+      description
+      img
+      brand
+      category
+    }
+  }
+`;
 
 const TrendingCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState(true);
+  const { category } = useParams();
 
-  const params = useParams();
+console.log(category)
+
+  const { loading, error, data, refetch } = useQuery(GET_PRODUCTS_CATEGORY, {
+    variables: { category:category }
+  })
+
+  if(loading) return <div>loading ..........</div>
+  console.log(error?.message)
+
+  console.log(data && data)
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -29,8 +53,8 @@ const TrendingCollection = () => {
     setIsDrawerOpen(false);
   };
 
-  const trendingUpperCase =
-    params?.title.charAt(0).toUpperCase() + params?.title.slice(1);
+  // const trendingUpperCase =
+  // category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <div className='bg-[#080808]'>
@@ -38,10 +62,10 @@ const TrendingCollection = () => {
       <FilterDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
 
       <div className='flex flex-col justify-center pl-10 w-full h-80 bg-[url("/trending/common-banner.webp")] *:text-white'>
-        <h3 className='font-medium'>Home / {trendingUpperCase}</h3>
-        <h3 className='text-3xl font-semibold mt-2'>{params?.title}</h3>
+        {/* <h3 className='font-medium'>Home / {trendingUpperCase}</h3> */}
+        <h3 className='text-3xl font-semibold mt-2'>{category}</h3>
         <p className='mt-3 text-xl'>
-          A {params?.title} description typically includes details about the
+          A {category} description typically includes details about the
           individual's expertise, experience, and speaking style. It...
         </p>
       </div>
@@ -365,11 +389,11 @@ const TrendingCollection = () => {
           {/* products - cloumn view*/}
           {viewMode && (
             <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
-              {[1, 2, 3].map((v, i) => (
-                <div key={i} className='bg-[#1c1c1c] p-5'>
+              {data?.productByCategories?.map((product) => (
+                <div key={product?._id} className='bg-[#1c1c1c] p-5'>
                   <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
                     <img
-                      src='/ultramax-watch.avif'
+                      src={product?.img}
                       className='w-full h-60 lg:h-72'
                       width={220}
                       height={350}
@@ -382,7 +406,7 @@ const TrendingCollection = () => {
                   </div>
 
                   <h2 className='text-2xl text-white my-2'>
-                    Ultra max 2.01 Big Diaplay
+                    {product?.title}
                   </h2>
                   <div className='flex items-center gap-1 *:text-orange-500'>
                     <FaStar />
@@ -392,7 +416,7 @@ const TrendingCollection = () => {
                     <FaStar />
                   </div>
                   <h3 className='text-2xl text-red-700 font-semibold my-2'>
-                    $56.00
+                    ${product?.price}
                   </h3>
                   <hr />
                   <div className='flex items-center justify-center my-2 gap-5 *:text-blue-700 *:text-lg'>
@@ -407,15 +431,15 @@ const TrendingCollection = () => {
           {/* products - row view*/}
           {!viewMode && (
             <div className='mt-10 grid grid-cols-1 gap-10'>
-              {[1, 2, 3].map((v, i) => (
+              {data?.productByCategories?.map((product) => (
                 <div
-                  key={i}
+                  key={product?._id}
                   className='bg-[#1c1c1c] p-5 flex flex-col lg:flex-row items-center justify-between gap-10'
                 >
                   <div className='flex flex-col lg:flex-row items-center lg:items-start gap-7'>
                     <div className='bg-[#262626] w-60 h-60'>
                       <img
-                        src='/computer.jpg'
+                        src={product?.img}
                         className='w-full h-full p-6 zooming'
                         width={220}
                         height={350}
@@ -424,11 +448,10 @@ const TrendingCollection = () => {
                     </div>
                     <div className='max-w-80'>
                       <h2 className='text-2xl text-white font-semibold my-2'>
-                        Ultra max 2.01 Big Diaplay
+                        {product?.title}
                       </h2>
                       <p className='text-white mt-2'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Id provident, explicabo sequi mollitia voluptatem earum!
+                        {product?.description}
                       </p>
                     </div>
                   </div>
@@ -442,7 +465,7 @@ const TrendingCollection = () => {
                       <FaStar />
                     </div>
                     <h3 className='text-2xl text-red-700 font-semibold my-2'>
-                      $56.00
+                      ${product?.price}
                     </h3>
                     <hr />
                     <div className='flex items-center justify-center my-2 gap-5 *:text-blue-700 *:text-lg'>

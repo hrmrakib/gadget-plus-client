@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: `/collection/:title`,
+        path: `/collection/:category`,
         element: <TrendingCollection />,
       },
       {
