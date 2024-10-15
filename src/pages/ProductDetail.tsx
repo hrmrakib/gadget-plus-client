@@ -13,7 +13,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const GET_PRODUCT = gql`
   query GetProduct($id: ID!) {
-    product(_id: $id) {
+    product(id: $id) {
       _id
       title
       price
@@ -27,21 +27,22 @@ const GET_PRODUCT = gql`
 `;
 
 const ProductDetail = () => {
-  const {id} = useParams();
+  const { id } = useParams();
 
-  const { loading, error, data, refetch } =useQuery(GET_PRODUCT, {
-    variables: {id}
+  const { loading, error, data } = useQuery(GET_PRODUCT, {
+    variables: { id: id },
   });
 
-  console.log(data && data)
+  if (loading) <span>loading....</span>;
+  if (error) <span>{error?.message}</span>;
 
-  return ( 
+  return (
     <div className='bg-[#080808]'>
       <div className='flex flex-col justify-center pl-10 w-full h-80 bg-[url("/trending/common-banner.webp")] *:text-white'>
-        <h3 className='font-medium'>Home / "title" </h3>
+        <h3 className='font-medium'>Home / {data?.product?.title} </h3>
         <p className='mt-3 text-xl'>
-          A "titel" description typically includes details about the
-          individual's expertise, experience, and speaking style. It...
+          A {data?.product?.title} description typically includes details about
+          the individual's expertise, experience, and speaking style. It...
         </p>
       </div>
 
@@ -51,33 +52,34 @@ const ProductDetail = () => {
             className='p-8 w-full'
             width={10}
             height={10}
-            src='/iphone.webp'
+            src={data?.product?.img}
             alt='img'
           />
         </div>
         <div>
           <h2 className='text-white text-3xl font-semibold'>
-            Ultra Max 2.01 Big Display
+            {data?.product?.title}
           </h2>
           <h3 className='text-blue-500 mt-2'>
-            $25.00 <del className='text-red-400'>$30.00</del>
+            ${data?.product?.price}{" "}
+            <del className='text-red-400'>
+              $
+              {data?.product?.price > 50
+                ? data?.product?.price + 20
+                : data?.product?.price + 5}
+            </del>
           </h3>
-          <p className='text-white mt-3'>
-            The Ultra Max 2.01 Big Display offers a large and vibrant display
-            for efficient viewing. With its upgraded technology, it allows for
-            more detailed and precise data to be displayed. Enhance your
-            experience with clear and crisp visuals.
-          </p>
+          <p className='text-white mt-3'>{data?.product?.description}</p>
 
           <div className='mt-3'>
             <h3 className='text-white'>Color:</h3>
-            <p className='text-white'>red, white, blue</p>
+            <p className='text-white'>{data?.product?.color}</p>
           </div>
 
           <div className='mt-3 flex flex-col md:flex-row items-center gap-5'>
             <div className='bg-white w-[110px] flex items-center border border-zinc-600'>
               <button className='border-r-2 px-3 py-2 font-medium'>-</button>
-              <span className='px-3 py-2'>22</span>
+              <span className='px-3 py-2'>1</span>
               <button className='border-l-2 px-3 py-2.5 font-medium'>+</button>
             </div>
             <button className='text-white bg-blue-500 py-2.5 px-3 flex items-center gap-2'>
