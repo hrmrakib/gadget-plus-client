@@ -1,8 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TiDeleteOutline } from "react-icons/ti";
+import {
+  deleteAllWishlist,
+  deleteWishlist,
+} from "../../features/wishlist/wishlistSlice";
 
 const Wishlist = () => {
-  const wishlists = useSelector((state) => state.favorite.favorites);
+  const dispatch = useDispatch();
+  const wishlists = useSelector((state) => state.wishlist.wishlists);
 
   return (
     <div>
@@ -53,7 +58,10 @@ const Wishlist = () => {
               </div>
 
               <div className='flex items-center justify-center'>
-                <TiDeleteOutline className='text-red-600 text-3xl cursor-pointer' />
+                <TiDeleteOutline
+                  onClick={() => dispatch(deleteWishlist(list?._id))}
+                  className='text-red-600 text-3xl cursor-pointer'
+                />
               </div>
             </div>
           ))}
@@ -61,9 +69,14 @@ const Wishlist = () => {
       </div>
 
       <div className='mt-20 flex items-center justify-center'>
-        <button className='bg-blue-500 text-white px-8 py-2 hover:bg-blue-600'>
-          Clear All
-        </button>
+        {wishlists.length > 0 && (
+          <button
+            onClick={() => dispatch(deleteAllWishlist())}
+            className='bg-blue-500 text-white px-8 py-2 hover:bg-blue-600'
+          >
+            Clear All
+          </button>
+        )}
       </div>
     </div>
   );

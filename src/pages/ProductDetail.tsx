@@ -13,7 +13,7 @@ import { useQuery, gql } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 import { errorToast, successToast } from "../components/toast/toast";
-import { addFavorite } from "../features/favorite/favoriteSlice";
+import { addToWishlist } from "../features/wishlist/wishlistSlice";
 
 const GET_PRODUCT = gql`
   query GetProduct($id: ID!) {
@@ -33,7 +33,7 @@ const GET_PRODUCT = gql`
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const message = useSelector((state) => state.favorite.message);
+  const message = useSelector((state) => state.wishlist.message);
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { id: id },
@@ -47,7 +47,7 @@ const ProductDetail = () => {
     successToast("Successfully, add to cart");
   };
   const handleFavorite = (product) => {
-    dispatch(addFavorite(product));
+    dispatch(addToWishlist(product));
     if (message) {
       return errorToast("Already added!");
     }

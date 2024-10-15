@@ -5,7 +5,7 @@ import { useQuery, gql } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
 import { AiOutlineHeart } from "react-icons/ai";
-import { addFavorite } from "../../features/favorite/favoriteSlice";
+import { addToWishlist } from "../../features/wishlist/wishlistSlice";
 import { errorToast, successToast } from "../toast/toast";
 
 const GET_PRODUCTS = gql`
@@ -22,7 +22,7 @@ const GET_PRODUCTS = gql`
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
-  const message = useSelector((state) => state.favorite.message);
+  const message = useSelector((state) => state.wishlist.message);
   const { loading, error, data } = useQuery(GET_PRODUCTS);
 
   if (loading) return <div>loading ....</div>;
@@ -33,7 +33,7 @@ const TrendingProducts = () => {
   };
 
   const handleFavorite = (product) => {
-    dispatch(addFavorite(product));
+    dispatch(addToWishlist(product));
     if (message) {
       return errorToast("Already added!");
     }
