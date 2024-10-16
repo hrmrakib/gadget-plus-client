@@ -1,22 +1,31 @@
-import React from "react";
-import { baseURL } from "./../../utils/baseURL";
+import { gql, useQuery } from "@apollo/client";
 
-const getPosts = async () => {
-  const res = await fetch(`${baseURL}/data/blog.json`);
-  const data = await res.json();
-  return data;
-};
+const GET_BLOGS = gql`
+  query get_Blogs {
+    blogs {
+      _id
+      title
+      date
+      image
+      description
+    }
+  }
+`;
 
-const BlogPosts = async () => {
-  const posts = await getPosts();
-  console.log({ posts });
+const BlogPosts = () => {
+  const { loading, error, data } = useQuery(GET_BLOGS);
+
+  if (loading) return <div>loading ....</div>;
+  if (error) return <div>{error?.message}</div>;
+
+  console.log(data && data);
 
   return (
     <div className='w-[96%] mx-auto mt-20'>
       <h2 className='text-3xl text-white t-shadow'>Blog Posts</h2>
 
       <div className='mt-12 grid grid-cols-3 gap-6'>
-        {posts?.map((post) => (
+        {data.blogs?.map((post) => (
           <div key={post?.id} className='border'>
             <img
               className='w-full h-60'

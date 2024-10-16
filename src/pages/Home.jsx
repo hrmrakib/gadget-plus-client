@@ -7,6 +7,7 @@ import TopNewArrivals from "./../components/home/TopNewArrivals";
 import LimitedTimeOffer from "./../components/home/LimitedTimeOffer";
 import CheckoutTheDiscount from "./../components/home/CheckoutTheDiscount";
 import CustomerFeedback from "./../components/home/CustomerFeedback";
+import BlogPosts from "../components/home/BlogPosts";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <LimitedTimeOffer />
       <CheckoutTheDiscount />
       <CustomerFeedback />
+      <BlogPosts />
     </div>
   );
 };
