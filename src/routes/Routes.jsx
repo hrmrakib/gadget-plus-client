@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import TrendingCollection from "../pages/TrendingCollection";
 import ProductDetail from "../pages/ProductDetail";
 import Wishlist from "../components/wishlist/Wishlist";
+import NewProductCollection from "../pages/NewProductCollection";
+import BestProductCollection from "./../pages/BestProductCollection";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
       {
         path: `/collection/:category`,
         element: <TrendingCollection />,
+      },
+      {
+        path: `/collection/new`,
+        element: <NewProductCollection />,
+      },
+      {
+        path: `/collection/best`,
+        element: <BestProductCollection />,
       },
       {
         path: `/product/:id`,
