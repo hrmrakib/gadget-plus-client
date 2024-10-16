@@ -32,7 +32,7 @@ const LimitedTimeOffer = () => {
               <FaStar />
             </div>
             <h3 className='text-2xl text-red-700 font-semibold my-2'>$56.00</h3>
-            <button className='w-full mb-2 flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+            <button className='w-full mb-2 flex items-center justify-center gap-3 py-2 border border-gray-700 text-white hover:bg-blue-600 transition duration-50 ease-in-out'>
               <FaCartPlus />
               Add to Cart
             </button>
@@ -65,7 +65,7 @@ const LimitedTimeOffer = () => {
               <FaStar />
             </div>
             <h3 className='text-2xl text-red-700 font-semibold my-2'>$56.00</h3>
-            <button className='w-full mb-2 flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+            <button className='w-full mb-2 flex items-center justify-center gap-3 py-2 border border-gray-700 text-white hover:bg-blue-600 transition duration-50 ease-in-out'>
               <FaCartPlus />
               Add to Cart
             </button>

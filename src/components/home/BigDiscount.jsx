@@ -12,8 +12,7 @@ const BigDiscount = () => {
           <del className='text-red-600 ml-3'>$55.00</del>
         </p>
         <div className='mt-5 flex items-center justify-center gap-2 text-center'>
-          {/* <button className='bg-[#2043f1] text-white btn btn-1 hover-filled-slide-left px-6 py-2.5 flex items-center gap-3'> */}
-          <button className=' btn btn-1 hover-filled-slide-left px-6 py-2.5 flex items-center gap-3'>
+          <button className='px-6 py-2.5 flex items-center gap-3 bg-[#2996D8] text-white delay-100 hover:bg-white hover:text-[#2996D8]'>
             <MdAdd /> <span>Add To Cart</span>
           </button>
         </div>

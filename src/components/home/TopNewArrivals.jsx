@@ -17,7 +17,7 @@ const TopNewArrivals = () => {
               height={850}
               alt='ultra'
             />
-            <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+            <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white hover:bg-blue-600 transition duration-50 ease-in-out'>
               <FaPlus />
               Add to Cart
             </button>
@@ -51,7 +51,7 @@ const TopNewArrivals = () => {
                 height={350}
                 alt='ultra'
               />
-              <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+              <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white hover:bg-blue-600 transition duration-50 ease-in-out'>
                 <FaPlus />
                 Add to Cart
               </button>
@@ -82,7 +82,7 @@ const TopNewArrivals = () => {
                 height={350}
                 alt='ultra'
               />
-              <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'>
+              <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white hover:bg-blue-600 transition duration-50 ease-in-out'>
                 <FaPlus />
                 Add to Cart
               </button>
