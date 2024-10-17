@@ -21,11 +21,12 @@ const TrendingCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState(true);
   const stockSummary = useRef(null);
+  const brandSummary = useRef(null);
 
   const [stock, setStock] = useState(null);
   const [price, setPrice] = useState({
-    min: 0,
-    max: 0,
+    minPrice: 0,
+    maxPrice: 0,
   });
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
@@ -42,7 +43,7 @@ const TrendingCollection = () => {
     queryKey: ["TrendingCollection"],
     queryFn: async () => {
       const res = await axiosPublic.get("/api/category", {
-        params: { category, stock },
+        params: { category, stock, price, brand },
       });
       return res.data;
     },
@@ -50,7 +51,7 @@ const TrendingCollection = () => {
 
   useEffect(() => {
     refetch();
-  }, [stock]);
+  }, [stock, price, brand]);
 
   if (isPending) return <FadeLoading />;
 
@@ -82,6 +83,19 @@ const TrendingCollection = () => {
 
     stockSummary.current = { inStock, outStock };
   }
+
+  // brand
+  if (!brandSummary.current) {
+    let brands = [];
+
+    products.forEach((product) => {
+      brands.push(product?.brand);
+    });
+
+    brandSummary.current = { brands };
+  }
+
+  console.log(brandSummary.current.brands);
 
   return (
     <div className='bg-[#080808]'>
@@ -165,7 +179,9 @@ const TrendingCollection = () => {
             </h3>
             <div className='flex justify-between items-center gap-2 *:text-white my-2'>
               <p>The highest price is ${maxPrice}</p>
-              <button>Reset</button>
+              <button onClick={() => setPrice({ minPrice: 0, maxPrice: 0 })}>
+                Reset
+              </button>
             </div>
 
             <div className='w-full flex items-center justify-between gap-3'>
@@ -176,7 +192,11 @@ const TrendingCollection = () => {
                 <input
                   className='w-full bg-transparent outline-none border border-gray-500 rounded-sm text-white p-2 mt-2'
                   type='number'
-                  placeholder='$0.00'
+                  placeholder='$5.00'
+                  // value={price.min}
+                  onChange={(e) =>
+                    setPrice({ ...price, minPrice: Number(e.target.value) })
+                  }
                 />
               </div>
               <div>
@@ -187,6 +207,10 @@ const TrendingCollection = () => {
                   className='w-full bg-transparent outline-none border border-gray-500 rounded-sm text-white p-2 mt-2'
                   type='number'
                   placeholder='$100.00'
+                  // value={price.max}
+                  onChange={(e) =>
+                    setPrice({ ...price, maxPrice: Number(e.target.value) })
+                  }
                 />
               </div>
             </div>
@@ -198,7 +222,7 @@ const TrendingCollection = () => {
               Product type
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
-              <p>0 selected</p>
+              <p>selected</p>
               <button>Reset</button>
             </div>
 
@@ -230,16 +254,16 @@ const TrendingCollection = () => {
               Brand
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
-              <p>0 selected</p>
+              <p>Select</p>
               <button>Reset</button>
             </div>
 
             <div className=''>
               <FormControl>
                 <RadioGroup name='radio-buttons-group'>
-                  {products?.map((product) => (
+                  {brandSummary?.current?.brands?.map((product, i) => (
                     <Box
-                      key={product?._id}
+                      key={i}
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -247,16 +271,17 @@ const TrendingCollection = () => {
                       }}
                     >
                       <Radio
-                        value={product?.brand}
+                        onClick={() => setBrand(product)}
+                        value={product}
                         sx={{
                           color: "white",
                           fontSize: { sm: "12px", md: "16px" },
                         }}
-                        label={product?.brand}
+                        label={product}
                         variant='solid'
                       />
                       <span className='text-white'>
-                        {product?.brand === product?.brand.length}
+                        {product === product?.length}
                       </span>
                     </Box>
                   ))}
