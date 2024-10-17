@@ -9,16 +9,27 @@ import Done from "@mui/icons-material/Done";
 import { MdTableRows } from "react-icons/md";
 import { IoGridOutline } from "react-icons/io5";
 import { FaEye, FaHeart, FaPlus, FaStar } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterDrawer from "../components/product/FilterDrawer";
 import TrendingProductCard from "./TrendingProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
+import FadeLoading from "../components/loading/FadeLoader";
 
 const TrendingCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState(true);
+  const stockSummary = useRef(null);
+
+  const [stock, setStock] = useState(null);
+  const [price, setPrice] = useState({
+    min: 0,
+    max: 0,
+  });
+  const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("");
+  const [collectionType, setCollectionType] = useState("");
 
   const { category } = useParams();
 
@@ -26,17 +37,22 @@ const TrendingCollection = () => {
     isPending,
     error,
     data: products,
+    refetch,
   } = useQuery({
     queryKey: ["TrendingCollection"],
     queryFn: async () => {
       const res = await axiosPublic.get("/api/category", {
-        params: { category },
+        params: { category, stock },
       });
       return res.data;
     },
   });
 
-  if (isPending) return "Loading...";
+  useEffect(() => {
+    refetch();
+  }, [stock]);
+
+  if (isPending) return <FadeLoading />;
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -47,6 +63,25 @@ const TrendingCollection = () => {
   const closeDrawer = () => {
     setIsDrawerOpen(false);
   };
+
+  // max price
+  const maxPrice = Math.max(...products.map((pro) => pro.price));
+
+  // total stock and out of stock product
+  if (!stockSummary.current) {
+    let inStock = 0;
+    let outStock = 0;
+
+    products.forEach((product) => {
+      if (product.stock === 0) {
+        outStock++;
+      } else if (product.stock > 0) {
+        inStock++;
+      }
+    });
+
+    stockSummary.current = { inStock, outStock };
+  }
 
   return (
     <div className='bg-[#080808]'>
@@ -78,17 +113,17 @@ const TrendingCollection = () => {
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
               <p>0 selected</p>
-              <button>Reset</button>
+              <button onClick={() => setStock(null)}>Reset</button>
             </div>
 
             <div className=''>
               <FormControl>
                 <RadioGroup defaultValue='in' name='radio-buttons-group'>
                   <Box
-                    onClick={() => setFilters("")}
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Radio
+                      onClick={() => setStock(true)}
                       value='in'
                       sx={{
                         color: "white",
@@ -97,12 +132,15 @@ const TrendingCollection = () => {
                       label='In Stack'
                       variant='solid'
                     />
-                    <span className='text-white'>5</span>
+                    <span className='text-white'>
+                      {stockSummary.current.inStock}
+                    </span>
                   </Box>
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Radio
+                      onClick={() => setStock(false)}
                       value='out'
                       sx={{
                         color: "white",
@@ -111,7 +149,9 @@ const TrendingCollection = () => {
                       label='Out of Stock'
                       variant='solid'
                     />
-                    <span className='text-white'>2</span>
+                    <span className='text-white'>
+                      {stockSummary.current.outStock}
+                    </span>
                   </Box>
                 </RadioGroup>
               </FormControl>
@@ -124,7 +164,7 @@ const TrendingCollection = () => {
               Price
             </h3>
             <div className='flex justify-between items-center gap-2 *:text-white my-2'>
-              <p>The highest price is $35.00</p>
+              <p>The highest price is ${maxPrice}</p>
               <button>Reset</button>
             </div>
 
@@ -174,7 +214,7 @@ const TrendingCollection = () => {
                         color: "white",
                         fontSize: { sm: "12px", md: "16px" },
                       }}
-                      label='Speaker'
+                      label={category}
                       variant='solid'
                     />
                     <span className='text-white'>5</span>
