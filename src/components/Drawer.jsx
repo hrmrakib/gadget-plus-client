@@ -1,10 +1,15 @@
 import React, { useRef, useEffect } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  decrementOrderCount,
+  incrementOrderCount,
+} from "../features/cart/cartSlice";
 
 const Drawer = ({ isOpen, onClose }) => {
   const carts = useSelector((state) => state.cart.carts);
+  const dispatch = useDispatch();
 
   const drawerRef = useRef(null);
 
@@ -95,11 +100,21 @@ const Drawer = ({ isOpen, onClose }) => {
                     <strong>Color:</strong> Gray
                   </p>
                   <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
-                    <button className='border-r-2 px-3 py-2 font-medium'>
+                    <button
+                      onClick={() =>
+                        dispatch(decrementOrderCount(product?._id))
+                      }
+                      className='border-r-2 px-3 py-2 font-medium'
+                    >
                       -
                     </button>
-                    <span className='px-3 py-2'>1</span>
-                    <button className='border-l-2 px-3 py-2 font-medium'>
+                    <span className='px-3 py-2'>{product?.orderCount}</span>
+                    <button
+                      onClick={() =>
+                        dispatch(incrementOrderCount(product?._id))
+                      }
+                      className='border-l-2 px-3 py-2 font-medium'
+                    >
                       +
                     </button>
                   </div>
