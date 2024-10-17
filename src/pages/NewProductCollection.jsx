@@ -1,36 +1,32 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { FaEye, FaPlus, FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineHeart } from "react-icons/ai";
 import { addToCart } from "../features/cart/cartSlice";
 import { addToWishlist } from "../features/wishlist/wishlistSlice";
-
-const COLLECTION_TYPE = gql`
-  query Collection_Type($collectionType: String!) {
-    collectionType(collectionType: $collectionType) {
-      _id
-      title
-      img
-      price
-      color
-      description
-      brand
-      category
-      collectionType
-    }
-  }
-`;
+import { useQuery } from "@tanstack/react-query";
+import { axiosPublic } from "../hooks/useAxiosPublic";
 
 const NewProductCollection = () => {
   const dispatch = useDispatch();
-  const { loading, error, data } = useQuery(COLLECTION_TYPE, {
-    variables: { collectionType: "new" },
+  const {
+    isPending,
+    error,
+    data: products,
+  } = useQuery({
+    queryKey: ["newCollection"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/api/collectionType", {
+        params: { type: "new" },
+      });
+      return res.data;
+    },
   });
 
-  if (loading) return <div>loading ....</div>;
-  if (error) return <div>{error?.message}</div>;
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <section className='w-[96%] mx-auto mt-20'>
@@ -43,11 +39,11 @@ const NewProductCollection = () => {
       </div>
 
       <h3 className='my-14 text-3xl font-bold text-center text-white'>
-        New Collection ({data?.collectionType.length})
+        New Collection ({products.length})
       </h3>
 
       <div className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
-        {data?.collectionType?.map((product) => (
+        {products?.map((product) => (
           <div key={product?._id} className='bg-[#1c1c1c] p-5'>
             <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
               <Link to={`/product/${product?._id}`}>

@@ -1,32 +1,32 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { FaEye, FaPlus, FaStar } from "react-icons/fa";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
 import { AiOutlineHeart } from "react-icons/ai";
 import { addToWishlist } from "../../features/wishlist/wishlistSlice";
 import { errorToast, successToast } from "../toast/toast";
-
-const GET_PRODUCTS = gql`
-  query Get_Products {
-    products {
-      _id
-      title
-      img
-      description
-      price
-    }
-  }
-`;
+import { axiosPublic } from "./../../hooks/useAxiosPublic";
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.wishlist.message);
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  const {
+    isPending,
+    error,
+    data: products,
+  } = useQuery({
+    queryKey: ["trendingProducts"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/api/products");
+      return res.data;
+    },
+  });
 
-  if (loading) return <div>loading ....</div>;
-  if (error) return <div>{error?.message}</div>;
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
 
   const handleAddToCard = (product) => {
     dispatch(addToCart(product));
@@ -45,7 +45,7 @@ const TrendingProducts = () => {
       <h2 className='text-3xl text-white t-shadow mb-8'>TrendingProducts</h2>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
-        {data?.products?.map((product) => (
+        {products?.map((product) => (
           <div key={product?._id} className='bg-[#1c1c1c] p-5'>
             <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
               <Link to={`/product/${product?._id}`}>

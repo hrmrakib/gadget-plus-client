@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Drawer = ({ isOpen, onClose }) => {
   const carts = useSelector((state) => state.cart.carts);
@@ -120,12 +121,13 @@ const Drawer = ({ isOpen, onClose }) => {
           </div>
 
           <div className='mt-5 bottom-0 w-full flex'>
-            <a
+            <Link
+              to={"/cart"}
               className='bg-gray-600 text-white w-1/2 py-2 text-center'
               href='#'
             >
               View Cart
-            </a>
+            </Link>
             <a
               className='bg-gray-900 text-white w-1/2 py-2 text-center'
               href='#'

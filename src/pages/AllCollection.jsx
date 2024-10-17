@@ -9,16 +9,18 @@ import Done from "@mui/icons-material/Done";
 import { MdTableRows } from "react-icons/md";
 import { IoGridOutline } from "react-icons/io5";
 import { FaEye, FaHeart, FaPlus, FaStar } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterDrawer from "../components/product/FilterDrawer";
 import TrendingProductCard from "./TrendingProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
 
-const TrendingCollection = () => {
+const AllCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState(true);
+  const [productLimit, setProductLimit] = useState(10);
+  const hasMounted = useRef(false);
 
   const { category } = useParams();
 
@@ -26,19 +28,34 @@ const TrendingCollection = () => {
     isPending,
     error,
     data: products,
+    refetch,
   } = useQuery({
-    queryKey: ["TrendingCollection"],
+    queryKey: ["allCollection"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/api/category", {
-        params: { category },
+      const res = await axiosPublic.get("/api/allCollection", {
+        params: { productLimit },
       });
       return res.data;
     },
   });
 
+  console.log(products);
+
   if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
+
+  const loadMoreProduct = () => {
+    setProductLimit((prev) => prev + 10);
+  };
+
+  //   useEffect(() => {
+  //     if (hasMounted.current) {
+  //       refetch();
+  //     } else {
+  //       hasMounted.current = true;
+  //     }
+  //   }, [productLimit, refetch]);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -390,10 +407,21 @@ const TrendingCollection = () => {
               />
             ))}
           </div>
+
+          <div className='flex items-center justify-center'>
+            {products.length < 30 ? (
+              <button
+                onClick={loadMoreProduct}
+                className='mt-14 px-9 flex items-center justify-center gap-3 py-3 border border-gray-700 text-white bg-blue-500 hover:bg-white hover:text-blue-600 transition duration-50 ease-in-out'
+              >
+                {isPending ? "loading ..." : " Load more"}
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default TrendingCollection;
+export default AllCollection;

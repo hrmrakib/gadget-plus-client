@@ -38,9 +38,12 @@ const Navbar = () => {
         {/* menubar item */}
         <div className='hidden lg:flex items-center gap-8 *:text-white'>
           <div className='relative group'>
-            <div className="flex group items-center gap-1 cursor-pointer relative text-sm text-gray-100 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-width after:duration-500 after:ease-in-out hover:after:w-full">
+            <Link
+              to={"/"}
+              className="flex group items-center gap-1 cursor-pointer relative text-sm text-gray-100 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-width after:duration-500 after:ease-in-out hover:after:w-full"
+            >
               Home
-            </div>
+            </Link>
           </div>
           <div className='relative group'>
             <li className='flex items-center gap-1 cursor-pointer text-sm text-gray-100 relative'>

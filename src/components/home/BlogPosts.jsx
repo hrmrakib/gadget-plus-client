@@ -1,31 +1,29 @@
-import { gql, useQuery } from "@apollo/client";
-
-const GET_BLOGS = gql`
-  query get_Blogs {
-    blogs {
-      _id
-      title
-      date
-      image
-      description
-    }
-  }
-`;
+import { useQuery } from "@tanstack/react-query";
+import { axiosPublic } from "../../hooks/useAxiosPublic";
 
 const BlogPosts = () => {
-  const { loading, error, data } = useQuery(GET_BLOGS);
+  const {
+    isPending,
+    error,
+    data: blogs,
+  } = useQuery({
+    queryKey: ["blogs"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/api/blogs");
+      return res.data;
+    },
+  });
 
-  if (loading) return <div>loading ....</div>;
-  if (error) return <div>{error?.message}</div>;
+  if (isPending) return "Loading...";
 
-  console.log(data && data);
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <div className='w-[96%] mx-auto mt-20'>
       <h2 className='text-3xl text-white t-shadow'>Blog Posts</h2>
 
       <div className='mt-12 grid grid-cols-3 gap-6'>
-        {data.blogs?.map((post) => (
+        {blogs?.map((post) => (
           <div key={post?.id} className='border'>
             <img
               className='w-full h-60'
