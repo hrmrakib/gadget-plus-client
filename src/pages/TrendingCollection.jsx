@@ -10,7 +10,7 @@ import { MdTableRows } from "react-icons/md";
 import { IoGridOutline } from "react-icons/io5";
 import { FaEye, FaHeart, FaPlus, FaStar } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import FilterDrawer from "../components/product/FilterDrawer";
 import TrendingProductCard from "./TrendingProductCard";
 import { useQuery } from "@tanstack/react-query";
@@ -20,6 +20,9 @@ import FadeLoading from "../components/loading/FadeLoader";
 const TrendingCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState(true);
+  const [brandList, setBrandList] = useState([]);
+  const location = useLocation();
+
   const stockSummary = useRef(null);
   const brandSummary = useRef(null);
 
@@ -43,7 +46,7 @@ const TrendingCollection = () => {
     queryKey: ["TrendingCollection"],
     queryFn: async () => {
       const res = await axiosPublic.get("/api/category", {
-        params: { category, stock, price, brand },
+        params: { category, stock, price, brand, collectionType },
       });
       return res.data;
     },
@@ -51,7 +54,14 @@ const TrendingCollection = () => {
 
   useEffect(() => {
     refetch();
-  }, [stock, price, brand]);
+  }, [stock, price, brand, collectionType]);
+
+  useEffect(() => {
+    if (products && products.length >= 5) {
+      const brands = products.map((product) => product?.brand);
+      setBrandList(brands);
+    }
+  }, [location, products]);
 
   if (isPending) return <FadeLoading />;
 
@@ -84,18 +94,18 @@ const TrendingCollection = () => {
     stockSummary.current = { inStock, outStock };
   }
 
-  // brand
-  if (!brandSummary.current) {
-    let brands = [];
+  // // brand
+  // if (!brandSummary.current) {
+  //   let brands = [];
 
-    products.forEach((product) => {
-      brands.push(product?.brand);
-    });
+  //   products.forEach((product) => {
+  //     brands.push(product?.brand);
+  //   });
 
-    brandSummary.current = { brands };
-  }
+  //   brandSummary.current = { brands };
+  // }
 
-  console.log(brandSummary.current.brands);
+  console.log({ brandList });
 
   return (
     <div className='bg-[#080808]'>
@@ -126,7 +136,7 @@ const TrendingCollection = () => {
               Availability
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
-              <p>0 selected</p>
+              <p>Select</p>
               <button onClick={() => setStock(null)}>Reset</button>
             </div>
 
@@ -222,7 +232,7 @@ const TrendingCollection = () => {
               Product type
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
-              <p>selected</p>
+              <p>Select</p>
               <button>Reset</button>
             </div>
 
@@ -255,13 +265,13 @@ const TrendingCollection = () => {
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
               <p>Select</p>
-              <button>Reset</button>
+              <button onClick={() => setBrand("")}>Reset</button>
             </div>
 
             <div className=''>
               <FormControl>
                 <RadioGroup name='radio-buttons-group'>
-                  {brandSummary?.current?.brands?.map((product, i) => (
+                  {brandList?.map((brand, i) => (
                     <Box
                       key={i}
                       sx={{
@@ -271,17 +281,17 @@ const TrendingCollection = () => {
                       }}
                     >
                       <Radio
-                        onClick={() => setBrand(product)}
-                        value={product}
+                        onClick={() => setBrand(brand)}
+                        value={brand}
                         sx={{
                           color: "white",
                           fontSize: { sm: "12px", md: "16px" },
                         }}
-                        label={product}
+                        label={brand}
                         variant='solid'
                       />
                       <span className='text-white'>
-                        {product === product?.length}
+                        {brand === brandList?.length}
                       </span>
                     </Box>
                   ))}
@@ -296,7 +306,7 @@ const TrendingCollection = () => {
               Color
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
-              <p>0 selected</p>
+              <p>Select</p>
               <button>Reset</button>
             </div>
 
@@ -354,33 +364,38 @@ const TrendingCollection = () => {
             </Box>
           </div>
 
-          {/* custom level */}
+          {/* Collection Type */}
           <div className='py-3 px-2.5 border-b border-b-gray-500'>
             <h3 className='bg-[#262626] text-white text-sm lg:text-base font-semibold text-center uppercase p-2'>
               Custom
             </h3>
             <div className='flex justify-between items-center *:text-white my-2'>
-              <p>0 selected</p>
-              <button>Reset</button>
+              <p>Select</p>
+              <button onClick={() => setCollectionType("")}>Reset</button>
             </div>
 
             <div className=''>
               <FormControl>
                 <RadioGroup name='radio-buttons-group'>
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Radio
-                      value='in'
-                      sx={{
-                        color: "white",
-                        fontSize: { sm: "12px", md: "16px" },
-                      }}
-                      label='New'
-                      variant='solid'
-                    />
-                    <span className='text-white'>5</span>
-                  </Box>
+                  {["new", "best"].map((type, i) => (
+                    <Box
+                      key={i}
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
+                      <Radio
+                        onClick={() => setCollectionType(type)}
+                        value={type}
+                        sx={{
+                          color: "white",
+                          fontSize: { sm: "12px", md: "16px" },
+                          marginTop: "8px",
+                        }}
+                        label={type}
+                        variant='solid'
+                      />
+                      <span className='text-white'></span>
+                    </Box>
+                  ))}
                 </RadioGroup>
               </FormControl>
             </div>
