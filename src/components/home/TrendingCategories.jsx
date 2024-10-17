@@ -1,51 +1,7 @@
 import React, { useRef } from "react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
-const trending = [
-  {
-    id: 1,
-    name: "iPhone",
-    img: "/trending/iphone.webp",
-    url: "iPhone",
-  },
-  {
-    id: 2,
-    name: "speaker",
-    img: "/trending/speaker.avif",
-    url: "speaker",
-  },
-  {
-    id: 3,
-    name: "headphones",
-    img: "/trending/headphones.avif",
-    url: "headphone",
-  },
-  {
-    id: 4,
-    name: "laptop",
-    img: "/trending/laptop.avif",
-    url: "laptop",
-  },
-  {
-    id: 5,
-    name: "airpods",
-    img: "/trending/airpods.webp",
-    url: "airpod",
-  },
-  {
-    id: 6,
-    name: "smart watch",
-    img: "/trending/smart-watch.avif",
-    url: "smartwatch",
-  },
-  {
-    id: 7,
-    name: "airpods",
-    img: "/trending/iphone.webp",
-    url: "mobile",
-  },
-];
+import { trending } from "../../constants";
 
 const TrendingCategories = () => {
   const scrollContainerRef = useRef(null);

@@ -75,7 +75,10 @@ const Drawer = ({ isOpen, onClose }) => {
 
           <div className='overflow-y-scroll scrollbar-hide h-[420px]'>
             {cartProducts?.map((product) => (
-              <div className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'>
+              <div
+                key={product?._id}
+                className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'
+              >
                 <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
                   <img
                     className='size-10'

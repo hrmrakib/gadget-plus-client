@@ -157,7 +157,7 @@ const TrendingCollection = () => {
                       variant='solid'
                     />
                     <span className='text-white'>
-                      {stockSummary.current.inStock}
+                      {stockSummary?.current?.inStock}
                     </span>
                   </Box>
                   <Box
@@ -174,7 +174,7 @@ const TrendingCollection = () => {
                       variant='solid'
                     />
                     <span className='text-white'>
-                      {stockSummary.current.outStock}
+                      {stockSummary?.current?.outStock}
                     </span>
                   </Box>
                 </RadioGroup>
