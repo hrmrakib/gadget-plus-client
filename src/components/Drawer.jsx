@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   decrementOrderCount,
+  deleteSingleProductFromCart,
   incrementOrderCount,
 } from "../features/cart/cartSlice";
 
@@ -82,7 +83,7 @@ const Drawer = ({ isOpen, onClose }) => {
             {cartProducts?.map((product) => (
               <div
                 key={product?._id}
-                className='mt-3 flex justify-between pb-3 border-b border-b-gray-800'
+                className='mt-3 flex justify-between gap-3 pb-3 border-b border-b-gray-800'
               >
                 <div className='bg-[#F5F5F5] flex items-center p-2 rounded-sm'>
                   <img
@@ -93,11 +94,12 @@ const Drawer = ({ isOpen, onClose }) => {
                     alt=''
                   />
                 </div>
+
                 <div>
                   <h3 className='text-lg font-semibold'>{product?.title}</h3>
-                  <p>$210.00</p>
+                  <p>${product?.price}</p>
                   <p>
-                    <strong>Color:</strong> Gray
+                    <strong>Color:</strong> {product?.color}
                   </p>
                   <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
                     <button
@@ -121,7 +123,12 @@ const Drawer = ({ isOpen, onClose }) => {
                 </div>
 
                 <div>
-                  <FaDeleteLeft />
+                  <FaDeleteLeft
+                    onClick={() =>
+                      dispatch(deleteSingleProductFromCart(product?._id))
+                    }
+                    size={20}
+                  />
                 </div>
               </div>
             ))}

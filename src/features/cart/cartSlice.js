@@ -44,8 +44,15 @@ const cartSlice = createSlice({
         return;
       }
     },
-    deleteSingleProductFromCart: (state, action) => {},
-    deleteAllProductFromCart: (state, action) => {},
+    deleteSingleProductFromCart: (state, action) => {
+      const rest = state.carts.filter((cart) => {
+        return cart._id !== action.payload;
+      });
+      state.carts = rest;
+    },
+    deleteAllProductFromCart: (state) => {
+      state.carts = [];
+    },
   },
 });
 

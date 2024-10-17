@@ -30,6 +30,7 @@ const TrendingProducts = () => {
 
   const handleAddToCard = (product) => {
     dispatch(addToCart(product));
+    successToast("Successfully, add to cart");
   };
 
   const handleFavorite = (product) => {
