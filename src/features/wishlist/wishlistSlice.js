@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { errorToast, successToast } from "../../components/toast/toast";
 
 const initialState = {
   wishlists: [],
-  message: false,
 };
 
 const wishlistSlice = createSlice({
@@ -15,12 +15,12 @@ const wishlistSlice = createSlice({
       });
 
       if (isExist) {
-        state.message = true;
+        errorToast("Already added to Wishlist!");
         return;
       } else {
         state.wishlists.push(action.payload);
+        successToast("Successfully, add to wishlist!");
       }
-      state.message = false;
     },
     deleteWishlist: (state, action) => {
       const rest = state.wishlists.filter(
@@ -38,4 +38,5 @@ const wishlistSlice = createSlice({
 
 export const { addToWishlist, deleteWishlist, deleteAllWishlist } =
   wishlistSlice.actions;
+
 export default wishlistSlice.reducer;

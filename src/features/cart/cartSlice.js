@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { successToast } from "../../components/toast/toast";
 
 const initialState = {
   carts: [],
@@ -9,6 +10,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      successToast("Successfully, add to cart!");
+
       if (state.carts.length > 0) {
         const exist = state.carts.find((cart) => {
           return cart._id === action.payload._id;
@@ -16,7 +19,6 @@ const cartSlice = createSlice({
 
         if (exist) {
           exist.orderCount = exist.orderCount + 1;
-
           return;
         }
       }

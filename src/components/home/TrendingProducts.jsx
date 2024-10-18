@@ -2,16 +2,15 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { FaEye, FaPlus, FaStar } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
 import { AiOutlineHeart } from "react-icons/ai";
-import { addToWishlist } from "../../features/wishlist/wishlistSlice";
-import { errorToast, successToast } from "../toast/toast";
 import { axiosPublic } from "./../../hooks/useAxiosPublic";
+import { addToWishlist } from "../../features/wishlist/wishlistSlice";
+import { addToCart } from "../../features/cart/cartSlice";
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
-  const message = useSelector((state) => state.wishlist.message);
+
   const {
     isPending,
     error,
@@ -30,15 +29,10 @@ const TrendingProducts = () => {
 
   const handleAddToCard = (product) => {
     dispatch(addToCart(product));
-    successToast("Successfully, add to cart");
   };
 
   const handleFavorite = (product) => {
     dispatch(addToWishlist(product));
-    if (message) {
-      return errorToast("Already added!");
-    }
-    successToast("Add to Favorite");
   };
 
   return (
