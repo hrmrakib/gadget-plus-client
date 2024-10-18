@@ -4,6 +4,7 @@ import {
   deleteAllWishlist,
   deleteWishlist,
 } from "../../features/wishlist/wishlistSlice";
+import { addToCart } from "../../features/cart/cartSlice";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,10 @@ const Wishlist = () => {
               </div>
 
               <div className='flex items-center justify-center'>
-                <button className='bg-blue-500 text-white px-5 py-2 hover:bg-blue-600'>
+                <button
+                  onClick={() => dispatch(addToCart(list))}
+                  className='bg-blue-500 text-white px-5 py-2 hover:bg-blue-600'
+                >
                   Add to Cart
                 </button>
               </div>
