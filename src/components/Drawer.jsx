@@ -7,14 +7,19 @@ import {
   deleteSingleProductFromCart,
   incrementOrderCount,
 } from "../features/cart/cartSlice";
+import useTotalCost from "../hooks/useTotalCost";
+import useCartProductCount from "../hooks/useCartProductCount";
 
 const Drawer = ({ isOpen, onClose }) => {
-  const carts = useSelector((state) => state.cart.carts);
+  const cartProducts = useSelector((state) => state.cart.carts);
+
   const dispatch = useDispatch();
 
   const drawerRef = useRef(null);
 
-  const cartProducts = useSelector((state) => state.cart.carts);
+  // total cost and cart product count
+  const { totalCost } = useTotalCost();
+  const { cartProductCount } = useCartProductCount();
 
   // Handle clicks outside the drawer to close it
   useEffect(() => {
@@ -70,7 +75,7 @@ const Drawer = ({ isOpen, onClose }) => {
         </div>
 
         <div className='px-4 py-2'>
-          {carts.length ? (
+          {cartProducts.length ? (
             <p className='pb-1.5 mb-2.5 border-b border-gray-700'>
               <strong>Congrats!</strong> You are eligible for{" "}
               <strong>FREE Shipping</strong>
@@ -101,7 +106,7 @@ const Drawer = ({ isOpen, onClose }) => {
                   <p>
                     <strong>Color:</strong> {product?.color}
                   </p>
-                  <div className='mt-2 w-[110px] flex items-center border border-zinc-600'>
+                  <div className='mt-2 w-max flex items-center border border-zinc-600'>
                     <button
                       onClick={() =>
                         dispatch(decrementOrderCount(product?._id))
@@ -141,8 +146,8 @@ const Drawer = ({ isOpen, onClose }) => {
             <h3>Subtotal</h3>
           </div>
           <div className='px-2 flex items-center justify-between *:text-base'>
-            <p>25</p>
-            <p>$5000</p>
+            <p>{cartProductCount}</p>
+            <p>${totalCost}</p>
           </div>
 
           <div className='mt-5 bottom-0 w-full flex'>
@@ -153,12 +158,13 @@ const Drawer = ({ isOpen, onClose }) => {
             >
               View Cart
             </Link>
-            <a
+            <Link
+              to={"/checkout"}
               className='bg-gray-900 text-white w-1/2 py-2 text-center'
               href='#'
             >
               Checkout
-            </a>
+            </Link>
           </div>
         </div>
       </div>

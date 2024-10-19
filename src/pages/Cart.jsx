@@ -1,8 +1,17 @@
-import { useSelector } from "react-redux";
+import { TiDeleteOutline } from "react-icons/ti";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import useTotalCost from "./../hooks/useTotalCost";
+import {
+  decrementOrderCount,
+  deleteSingleProductFromCart,
+  incrementOrderCount,
+} from "../features/cart/cartSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cart.carts);
+  const { totalCost } = useTotalCost();
 
   return (
     <section>
@@ -22,16 +31,16 @@ const Cart = () => {
 
           <div className='grid grid-cols-4 px-10'>
             <div className='bg-gray-900 text-center py-2 border-r border-r-gray-300 text-white'>
-              Product
+              Image
             </div>
             <div className='bg-gray-900 text-center py-2 border-r border-r-gray-300 text-white'>
-              Product
+              Detail
             </div>
             <div className='bg-gray-900 text-center py-2 border-r border-r-gray-300 text-white'>
-              Product
+              Quantity
             </div>
             <div className='bg-gray-900 text-center py-2 text-white'>
-              Product
+              Total Cost
             </div>
           </div>
 
@@ -51,17 +60,38 @@ const Cart = () => {
                   <p className='text-white'>Color: {list?.color}</p>
                 </div>
 
-                <div className='flex items-center justify-center'>
-                  <button className='bg-blue-500 text-white px-5 py-2 hover:bg-blue-600'>
-                    Add to Cart
-                  </button>
+                <div className='flex flex-col gap-5 items-center justify-center'>
+                  <div className='mt-2 w-max flex items-center border border-zinc-600'>
+                    <button
+                      onClick={() => dispatch(decrementOrderCount(list?._id))}
+                      className='border-r px-3 py-2 font-medium text-white'
+                    >
+                      -
+                    </button>
+                    <span className='px-3 py-2 text-white'>
+                      {list?.orderCount}
+                    </span>
+                    <button
+                      onClick={() => dispatch(incrementOrderCount(list?._id))}
+                      className='border-l px-3 py-2 font-medium text-white'
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div>
+                    <TiDeleteOutline
+                      onClick={() =>
+                        dispatch(deleteSingleProductFromCart(list?._id))
+                      }
+                      className='text-red-600 text-3xl cursor-pointer'
+                    />
+                  </div>
                 </div>
 
                 <div className='flex items-center justify-center'>
-                  <TiDeleteOutline
-                    //   onClick={() => dispatch(deleteWishlist(list?._id))}
-                    className='text-red-600 text-3xl cursor-pointer'
-                  />
+                  <p className='text-white text-lg font-semibold'>
+                    ${Number(list?.price) * Number(list?.orderCount)}
+                  </p>
                 </div>
               </div>
             ))}
@@ -78,16 +108,19 @@ const Cart = () => {
 
           <div className='flex items-center justify-between *:text-white font-semibold'>
             <p>Subtotal</p>
-            <p>$500</p>
+            <p>${totalCost}</p>
           </div>
 
           <p className='text-white text-sm my-4'>
             Taxes and shipping calculated at checkout
           </p>
 
-          <button className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white bg-blue-500 hover:bg-white hover:text-blue-600 transition duration-50 ease-in-out'>
+          <Link
+            to={"/checkout"}
+            className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white bg-blue-500 hover:bg-white hover:text-blue-600 transition duration-50 ease-in-out'
+          >
             Checkout
-          </button>
+          </Link>
 
           <Link
             to={"/collection/all"}

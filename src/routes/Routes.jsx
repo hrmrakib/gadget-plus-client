@@ -8,6 +8,7 @@ import NewProductCollection from "../pages/NewProductCollection";
 import BestProductCollection from "./../pages/BestProductCollection";
 import Cart from "../pages/Cart";
 import AllCollection from "../pages/AllCollection";
+import Checkout from "../pages/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: `/collection/all`,
         element: <AllCollection />,
+      },
+      {
+        path: `/checkout/:id`,
+        element: <Checkout />,
+      },
+      {
+        path: `/checkout`,
+        element: <Checkout />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { successToast } from "../../components/toast/toast";
+import { errorToast, successToast } from "../../components/toast/toast";
 
 const initialState = {
   carts: [],
@@ -30,8 +30,9 @@ const cartSlice = createSlice({
       });
       if (exist) {
         exist.orderCount = exist.orderCount + 1;
-
         return;
+      } else {
+        errorToast("Firstly, add to cart!");
       }
     },
     decrementOrderCount: (state, action) => {
@@ -46,6 +47,7 @@ const cartSlice = createSlice({
         return;
       }
     },
+
     deleteSingleProductFromCart: (state, action) => {
       const rest = state.carts.filter((cart) => {
         return cart._id !== action.payload;

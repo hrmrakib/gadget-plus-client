@@ -211,7 +211,7 @@ const TrendingCollection = () => {
               </div>
               <div>
                 <label className='text-white' htmlFor=''>
-                  Min price:
+                  Max price:
                 </label>
                 <input
                   className='w-full bg-transparent outline-none border border-gray-500 rounded-sm text-white p-2 mt-2'

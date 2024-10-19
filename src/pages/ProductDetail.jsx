@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoBasketOutline } from "react-icons/io5";
 import { IoHeartOutline } from "react-icons/io5";
 import { GoQuestion } from "react-icons/go";
@@ -7,11 +7,14 @@ import { SiLoopback } from "react-icons/si";
 import { GiCargoShip } from "react-icons/gi";
 import { BsEnvelopeCheck } from "react-icons/bs";
 import { LuCalendarClock } from "react-icons/lu";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductDescTab from "../components/product/ProductDescTab";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../features/cart/cartSlice";
-import { errorToast, successToast } from "../components/toast/toast";
+import {
+  addToCart,
+  decrementOrderCount,
+  incrementOrderCount,
+} from "../features/cart/cartSlice";
 import { addToWishlist } from "../features/wishlist/wishlistSlice";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
@@ -19,7 +22,9 @@ import { axiosPublic } from "../hooks/useAxiosPublic";
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const message = useSelector((state) => state.wishlist.message);
+  const currentProduct = useSelector((state) => {
+    return state.cart.carts.find((cart) => cart._id === id);
+  });
 
   const {
     isPending,
@@ -41,14 +46,10 @@ const ProductDetail = () => {
 
   const handleAddToCard = (product) => {
     dispatch(addToCart(product));
-    successToast("Successfully, add to cart");
   };
+
   const handleFavorite = (product) => {
     dispatch(addToWishlist(product));
-    if (message) {
-      return errorToast("Already added!");
-    }
-    successToast("Add to Favorite");
   };
 
   return (
@@ -89,10 +90,22 @@ const ProductDetail = () => {
           </div>
 
           <div className='mt-3 flex flex-col md:flex-row items-center gap-5'>
-            <div className='bg-white w-[110px] flex items-center border border-zinc-600'>
-              <button className='border-r-2 px-3 py-2 font-medium'>-</button>
-              <span className='px-3 py-2'>1</span>
-              <button className='border-l-2 px-3 py-2.5 font-medium'>+</button>
+            <div className='bg-white w-max flex items-center border border-zinc-600'>
+              <button
+                onClick={() => dispatch(decrementOrderCount(id))}
+                className='border-r-2 px-3 py-2 font-medium'
+              >
+                -
+              </button>
+              <span className='px-3 py-2'>
+                {currentProduct?.orderCount || 1}
+              </span>
+              <button
+                onClick={() => dispatch(incrementOrderCount(id))}
+                className='border-l-2 px-3 py-2.5 font-medium'
+              >
+                +
+              </button>
             </div>
             <button
               onClick={() => handleAddToCard(product)}
@@ -101,9 +114,12 @@ const ProductDetail = () => {
               <IoBasketOutline />
               Add to Cart
             </button>
-            <button className='text-white bg-[#1c1c1c] py-2.5 px-4'>
+            <Link
+              to={`/checkout/${id}`}
+              className='text-white bg-[#1c1c1c] py-2.5 px-4'
+            >
               Buy it now
-            </button>
+            </Link>
             <div
               onClick={() => handleFavorite(product)}
               className='border py-2.5 px-2.5 cursor-pointer'
