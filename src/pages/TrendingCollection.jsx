@@ -94,19 +94,6 @@ const TrendingCollection = () => {
     stockSummary.current = { inStock, outStock };
   }
 
-  // // brand
-  // if (!brandSummary.current) {
-  //   let brands = [];
-
-  //   products.forEach((product) => {
-  //     brands.push(product?.brand);
-  //   });
-
-  //   brandSummary.current = { brands };
-  // }
-
-  console.log({ brandList });
-
   return (
     <div className='bg-[#080808]'>
       {/* Filter Drawer */}

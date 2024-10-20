@@ -23,13 +23,15 @@ const TrendingProductCard = ({ product, viewMode }) => {
         <div className='mt-10 flex gap-10'>
           <div className='bg-[#1c1c1c] p-5'>
             <div className='bg-[#262626] flex flex-col items-center justify-center gap-2'>
-              <img
-                src={product?.img}
-                className='w-full h-60 lg:h-72'
-                width={220}
-                height={350}
-                alt='ultra'
-              />
+              <Link to={`/product/${product?._id}`}>
+                <img
+                  src={product?.img}
+                  className='w-full h-60 lg:h-72'
+                  width={220}
+                  height={350}
+                  alt='ultra'
+                />
+              </Link>
               <button
                 onClick={() => handleAddToCart(product)}
                 className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white'
