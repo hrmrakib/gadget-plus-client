@@ -15,7 +15,7 @@ import FilterDrawer from "../components/product/FilterDrawer";
 import TrendingProductCard from "./TrendingProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
-import FadeLoading from "../components/loading/FadeLoader";
+import FadeLoading from "../components/loading/FadeLoading";
 
 const TrendingCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

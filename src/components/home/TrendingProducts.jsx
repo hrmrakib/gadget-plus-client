@@ -7,6 +7,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { axiosPublic } from "./../../hooks/useAxiosPublic";
 import { addToWishlist } from "../../features/wishlist/wishlistSlice";
 import { addToCart } from "../../features/cart/cartSlice";
+import FadeLoading from "../loading/FadeLoading";
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const TrendingProducts = () => {
     },
   });
 
-  if (isPending) return "Loading...";
+  if (isPending) return <FadeLoading />;
 
   if (error) return "An error has occurred: " + error.message;
 

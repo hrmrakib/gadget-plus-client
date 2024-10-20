@@ -15,6 +15,7 @@ import FilterDrawer from "../components/product/FilterDrawer";
 import TrendingProductCard from "./TrendingProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
+import FadeLoading from "../components/loading/FadeLoading";
 
 const AllCollection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -41,7 +42,7 @@ const AllCollection = () => {
 
   console.log(products);
 
-  if (isPending) return "Loading...";
+  if (isPending) return <FadeLoading />;
 
   if (error) return "An error has occurred: " + error.message;
 

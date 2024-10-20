@@ -17,6 +17,7 @@ import { addToWishlist } from "../features/wishlist/wishlistSlice";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
 import ProductDescTab from "./../components/product/ProductDescTab";
+import FadeLoading from "../components/loading/FadeLoading";
 
 const ProductPage = () => {
   const { title } = useParams();
@@ -40,7 +41,7 @@ const ProductPage = () => {
     return state.cart.carts.find((cart) => cart._id === product?._id);
   });
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <FadeLoading />;
 
   if (error) return "An error has occurred: " + error.message;
 

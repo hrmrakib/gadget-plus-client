@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../../hooks/useAxiosPublic";
+import FadeLoading from "../loading/FadeLoading";
 
 const BlogPosts = () => {
   const {
@@ -14,7 +15,7 @@ const BlogPosts = () => {
     },
   });
 
-  if (isPending) return "Loading...";
+  if (isPending) return <FadeLoading />;
 
   if (error) return "An error has occurred: " + error.message;
 

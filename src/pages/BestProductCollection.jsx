@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaEye, FaPlus, FaStar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
-// import { addToWishlist } from "../../features/wishlist/wishlistSlice";
-// import { errorToast, successToast } from "../toast/toast";
+import FadeLoading from "../components/loading/FadeLoading";
 
 const BestProductCollection = () => {
   const {
@@ -22,7 +20,7 @@ const BestProductCollection = () => {
     },
   });
 
-  if (isPending) return "Loading...";
+  if (isPending) return <FadeLoading />;
 
   if (error) return "An error has occurred: " + error.message;
 
