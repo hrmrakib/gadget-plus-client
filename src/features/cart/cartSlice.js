@@ -10,6 +10,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      if (action.payload.stock === 0) {
+        errorToast("Out of stock!");
+        return;
+      }
+
       successToast("Successfully, add to cart!");
 
       if (state.carts.length > 0) {

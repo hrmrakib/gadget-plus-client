@@ -10,6 +10,7 @@ import Cart from "../pages/Cart";
 import AllCollection from "../pages/AllCollection";
 import Checkout from "../pages/Checkout";
 import ErrorPage from "../pages/ErrorPage";
+import ProductPage from "./../pages/ProductPage";
 
 const router = createBrowserRouter([
   {
@@ -58,8 +59,8 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: `/iphone-15`,
-        element: <h2>iphone-15 - lorem ipsum </h2>,
+        path: `/product/:title`,
+        element: <ProductPage />,
       },
     ],
   },

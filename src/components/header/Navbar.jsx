@@ -63,7 +63,7 @@ const Navbar = () => {
                 {productLinks.map((link, i) => (
                   <Link
                     key={i}
-                    to={link?.link}
+                    to={`/product/${link?.link}`}
                     className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
