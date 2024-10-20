@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import useTotalCost from "../hooks/useTotalCost";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { axiosPublic } from "../hooks/useAxiosPublic";
 
 const Checkout = () => {
   const cartProducts = useSelector((state) => state.cart.carts);
@@ -11,32 +9,10 @@ const Checkout = () => {
   const { id } = useParams();
 
   let product;
-  let isPending, error;
 
   if (id) {
     product = cartProducts.find((product) => product._id === id);
   }
-  //  else if(id) {
-  //   const queryResult = useQuery({
-  //     queryKey: ["checkout"],
-  //     queryFn: async () => {
-  //       const res = await axiosPublic.get("/api/product", {
-  //         params: { id },
-  //       });
-  //       return res.data;
-  //     },
-  //   });
-
-  //   isPending = queryResult.isLoading;
-  //   error = queryResult.error;
-  //   product = queryResult.data;
-  // }
-
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
-
-  console.log(product, id);
 
   const [formData, setFormData] = useState({
     firstName: "",

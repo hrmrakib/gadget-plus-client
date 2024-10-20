@@ -1,19 +1,19 @@
 export const productLinks = [
   {
-    link: "iphone-15",
+    link: "Apple iPhone 15 Pro",
     text: "iPhone 15 Pro",
   },
   {
-    link: "oneplus-11",
+    link: "OnePlus 11",
     text: "OnePlus 11",
   },
   {
-    link: "oppo-f23-ultra",
-    text: "OPPO F23 Ultra",
+    link: "Sonos Move",
+    text: "Sonos Move",
   },
   {
-    link: "sumsang-galaxy",
-    text: "Sumsang Galaxy",
+    link: "Dell XPS 13",
+    text: "Dell XPS 13",
   },
 ];
 

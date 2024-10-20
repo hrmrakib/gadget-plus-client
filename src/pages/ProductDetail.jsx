@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IoBasketOutline } from "react-icons/io5";
 import { IoHeartOutline } from "react-icons/io5";
 import { GoQuestion } from "react-icons/go";

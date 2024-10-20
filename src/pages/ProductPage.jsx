@@ -21,27 +21,26 @@ import ProductDescTab from "./../components/product/ProductDescTab";
 const ProductPage = () => {
   const { title } = useParams();
   const dispatch = useDispatch();
-  console.log(title);
-  return;
-  const currentProduct = useSelector((state) => {
-    return state.cart.carts.find((cart) => cart._id === id);
-  });
 
   const {
-    isPending,
+    isLoading,
     error,
     data: product,
   } = useQuery({
-    queryKey: ["productPage"],
+    queryKey: [title],
     queryFn: async () => {
-      const res = await axiosPublic.get("/api/product", {
+      const res = await axiosPublic.get("/api/product-by-title", {
         params: { title },
       });
       return res.data;
     },
   });
 
-  if (isPending) return "Loading...";
+  const currentProduct = useSelector((state) => {
+    return state.cart.carts.find((cart) => cart._id === product?._id);
+  });
+
+  if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -52,8 +51,6 @@ const ProductPage = () => {
   const handleFavorite = (product) => {
     dispatch(addToWishlist(product));
   };
-
-  return <div>dkfgdkjhdkjdh</div>;
 
   return (
     <div className='bg-[#080808]'>
@@ -95,7 +92,7 @@ const ProductPage = () => {
           <div className='mt-3 flex flex-col md:flex-row items-center gap-5'>
             <div className='bg-white w-max flex items-center border border-zinc-600'>
               <button
-                onClick={() => dispatch(decrementOrderCount(id))}
+                onClick={() => dispatch(decrementOrderCount(product?._id))}
                 className='border-r-2 px-3 py-2 font-medium'
               >
                 -
@@ -104,7 +101,7 @@ const ProductPage = () => {
                 {currentProduct?.orderCount || 1}
               </span>
               <button
-                onClick={() => dispatch(incrementOrderCount(id))}
+                onClick={() => dispatch(incrementOrderCount(product?._id))}
                 className='border-l-2 px-3 py-2.5 font-medium'
               >
                 +
@@ -118,7 +115,7 @@ const ProductPage = () => {
               Add to Cart
             </button>
             <Link
-              to={`/checkout/${id}`}
+              to={`/checkout/${product?._id}}`}
               className='text-white bg-[#1c1c1c] py-2.5 px-4'
             >
               Buy it now
