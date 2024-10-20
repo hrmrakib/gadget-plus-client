@@ -93,7 +93,7 @@ const ProductPage = () => {
             <div className='bg-white w-max flex items-center border border-zinc-600'>
               <button
                 onClick={() => dispatch(decrementOrderCount(product?._id))}
-                className='border-r-2 px-3 py-2 font-medium'
+                className='border-r-2 px-3  py-2 font-medium'
               >
                 -
               </button>
