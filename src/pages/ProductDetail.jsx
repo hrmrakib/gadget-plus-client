@@ -126,7 +126,7 @@ const ProductDetail = () => {
             </button>
             <Link
               onClick={() => handleOutofStockAlert(product)}
-              to={`${product?.stock < 1 ? "" : `/checkout/${id}`}`}
+              to={`${product?.stock < 1 ? "" : `/checkout/${product?._id}`}`}
               className={`text-white bg-[#1c1c1c] py-2.5 px-4 ${
                 product?.stock < 1 && "cursor-not-allowed"
               }`}

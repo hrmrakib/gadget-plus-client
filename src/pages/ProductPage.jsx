@@ -18,6 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
 import ProductDescTab from "./../components/product/ProductDescTab";
 import FadeLoading from "../components/loading/FadeLoading";
+import { errorToast } from "../components/toast/toast";
 
 const ProductPage = () => {
   const { title } = useParams();
@@ -51,6 +52,13 @@ const ProductPage = () => {
 
   const handleFavorite = (product) => {
     dispatch(addToWishlist(product));
+  };
+
+  const handleOutofStockAlert = (product) => {
+    if (product?.stock < 1) {
+      return errorToast("Out of stock");
+    }
+    dispatch(addToCart(product));
   };
 
   return (
@@ -116,7 +124,8 @@ const ProductPage = () => {
               Add to Cart
             </button>
             <Link
-              to={`/checkout/${product?._id}}`}
+              onClick={() => handleOutofStockAlert(product)}
+              to={`/checkout/${product?._id}`}
               className='text-white bg-[#1c1c1c] py-2.5 px-4'
             >
               Buy it now

@@ -44,6 +44,8 @@ const Checkout = () => {
 
   const taxes = ((totalCost / 100) * 1.15).toFixed(2);
 
+  console.log(id, product);
+
   return (
     <div className='min-h-screen bg-[#080808] py-12 my-16 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-7xl mx-auto'>
