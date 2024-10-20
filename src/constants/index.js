@@ -1,56 +1,56 @@
 export const productLinks = [
   {
-    link: "",
+    link: "/iphone-15",
     text: "iPhone 15 Pro",
   },
   {
-    link: "",
+    link: "/oneplus-11",
     text: "OnePlus 11",
   },
   {
-    link: "",
+    link: "/oppo-f23-ultra",
     text: "OPPO F23 Ultra",
   },
   {
-    link: "",
+    link: "/sumsang-galaxy",
     text: "Sumsang Galaxy",
   },
 ];
 
 export const pageLinks = [
   {
-    link: "",
+    link: "/about",
     text: "About Us",
   },
   {
-    link: "",
+    link: "/contact",
     text: "Contact",
   },
   {
-    link: "",
+    link: "/faq",
     text: "FAQ's",
   },
   {
-    link: "",
+    link: "/privacy-policy",
     text: "Privacy & Policy",
   },
   {
-    link: "",
+    link: "/shipping-and-return",
     text: "Shipping & Return",
   },
   {
-    link: "",
+    link: "/terms-and-conditions",
     text: "Terms & Condition",
   },
 ];
 
 export const blogLinks = [
   {
-    link: "",
+    link: "/blog",
     text: "Blog Page",
   },
   {
-    link: "",
+    link: "/article",
     text: "Article",
   },
 ];

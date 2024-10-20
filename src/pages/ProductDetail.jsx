@@ -22,6 +22,7 @@ import { axiosPublic } from "../hooks/useAxiosPublic";
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+
   const currentProduct = useSelector((state) => {
     return state.cart.carts.find((cart) => cart._id === id);
   });

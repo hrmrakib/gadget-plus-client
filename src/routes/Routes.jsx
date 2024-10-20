@@ -9,11 +9,13 @@ import BestProductCollection from "./../pages/BestProductCollection";
 import Cart from "../pages/Cart";
 import AllCollection from "../pages/AllCollection";
 import Checkout from "../pages/Checkout";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: `/checkout`,
         element: <Checkout />,
+      },
+      {
+        path: `/iphone-15`,
+        element: <h2>iphone-15 - lorem ipsum </h2>,
       },
     ],
   },

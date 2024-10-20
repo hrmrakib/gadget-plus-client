@@ -63,7 +63,7 @@ const Navbar = () => {
                 {productLinks.map((link, i) => (
                   <Link
                     key={i}
-                    href='#'
+                    to={link?.link}
                     className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
@@ -91,7 +91,7 @@ const Navbar = () => {
                 {pageLinks.map((link, i) => (
                   <Link
                     key={i}
-                    href='#'
+                    to={link?.link}
                     className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
@@ -119,7 +119,7 @@ const Navbar = () => {
                 {blogLinks.map((link, i) => (
                   <Link
                     key={i}
-                    href='#'
+                    to={link?.link}
                     className='block px-4 py-2 text-sm text-white hover:text-blue-500'
                     role='menuitem'
                   >
