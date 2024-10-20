@@ -18,6 +18,7 @@ import {
 import { addToWishlist } from "../features/wishlist/wishlistSlice";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
+import { errorToast } from "../components/toast/toast";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -51,6 +52,13 @@ const ProductDetail = () => {
 
   const handleFavorite = (product) => {
     dispatch(addToWishlist(product));
+  };
+
+  const handleOutofStockAlert = (product) => {
+    if (product?.stock < 1) {
+      return errorToast("Out of stock");
+    }
+    dispatch(addToCart(product));
   };
 
   return (
@@ -116,8 +124,11 @@ const ProductDetail = () => {
               Add to Cart
             </button>
             <Link
-              to={`/checkout/${id}`}
-              className='text-white bg-[#1c1c1c] py-2.5 px-4'
+              onClick={() => handleOutofStockAlert(product)}
+              to={`${product?.stock < 1 ? "" : `/checkout/${id}`}`}
+              className={`text-white bg-[#1c1c1c] py-2.5 px-4 ${
+                product?.stock < 1 && "cursor-not-allowed"
+              }`}
             >
               Buy it now
             </Link>

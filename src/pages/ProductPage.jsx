@@ -32,7 +32,7 @@ const ProductPage = () => {
     error,
     data: product,
   } = useQuery({
-    queryKey: ["productDetail"],
+    queryKey: ["productPage"],
     queryFn: async () => {
       const res = await axiosPublic.get("/api/product", {
         params: { title },
