@@ -11,6 +11,12 @@ import AllCollection from "../pages/AllCollection";
 import Checkout from "../pages/Checkout";
 import ErrorPage from "../pages/ErrorPage";
 import ProductPage from "./../pages/ProductPage";
+import About from "../pages/pageMenu/About";
+import Contact from "../pages/pageMenu/Contact";
+import FAQ from "../pages/pageMenu/FAQ";
+import PrivacyAndPolicy from "../pages/pageMenu/PrivacyAndPolicy";
+import ShippingAndReturn from "../pages/pageMenu/ShippingAndReturn";
+import TermAndCondition from "../pages/pageMenu/TermAndCondition";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +67,30 @@ const router = createBrowserRouter([
       {
         path: `/products/:title`,
         element: <ProductPage />,
+      },
+      {
+        path: `/about`,
+        element: <About />,
+      },
+      {
+        path: `/contact`,
+        element: <Contact />,
+      },
+      {
+        path: `/faq`,
+        element: <FAQ />,
+      },
+      {
+        path: `/privacy-policy`,
+        element: <PrivacyAndPolicy />,
+      },
+      {
+        path: `/shipping-and-return`,
+        element: <ShippingAndReturn />,
+      },
+      {
+        path: `/terms-and-conditions`,
+        element: <TermAndCondition />,
       },
     ],
   },

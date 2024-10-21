@@ -99,3 +99,27 @@ export const trending = [
     url: "mobile",
   },
 ];
+
+export const whyChoose = [
+  "Curated Selection",
+  "Expert Advice",
+  "Fast Shipping",
+  "Quality Guarantee",
+  "24/7 Support",
+  "Easy Returns",
+];
+
+export const roles = [
+  {
+    role: "CEO",
+    img: "/testimonial/img1.webp",
+  },
+  {
+    role: "CTO",
+    img: "/testimonial/img2.webp",
+  },
+  {
+    role: "Head of Customer Experience",
+    img: "/testimonial/img3.webp",
+  },
+];
