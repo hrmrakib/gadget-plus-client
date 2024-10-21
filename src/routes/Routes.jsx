@@ -17,6 +17,8 @@ import FAQ from "../pages/pageMenu/FAQ";
 import PrivacyAndPolicy from "../pages/pageMenu/PrivacyAndPolicy";
 import ShippingAndReturn from "../pages/pageMenu/ShippingAndReturn";
 import TermAndCondition from "../pages/pageMenu/TermAndCondition";
+import ArticlePage from "../pages/blogMenu/ArticlePage";
+import BlogPage from "../pages/blogMenu/BlogPage";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +93,14 @@ const router = createBrowserRouter([
       {
         path: `/terms-and-conditions`,
         element: <TermAndCondition />,
+      },
+      {
+        path: `/blog`,
+        element: <BlogPage />,
+      },
+      {
+        path: `/article`,
+        element: <ArticlePage />,
       },
     ],
   },
