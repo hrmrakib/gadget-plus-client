@@ -24,7 +24,7 @@ const BlogPosts = () => {
       <h2 className='text-3xl text-white t-shadow'>Blog Posts</h2>
 
       <div className='mt-12 grid grid-cols-3 gap-6'>
-        {blogs?.map((post) => (
+        {blogs?.slice(0, 3)?.map((post) => (
           <div key={post?.id} className='border'>
             <img
               className='w-full h-60'

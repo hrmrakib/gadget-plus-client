@@ -19,6 +19,7 @@ import ShippingAndReturn from "../pages/pageMenu/ShippingAndReturn";
 import TermAndCondition from "../pages/pageMenu/TermAndCondition";
 import ArticlePage from "../pages/blogMenu/ArticlePage";
 import BlogPage from "../pages/blogMenu/BlogPage";
+import BlogDetail from "../pages/blogMenu/BlogDetail";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
       {
         path: `/blog`,
         element: <BlogPage />,
+      },
+      {
+        path: `/blog/:id`,
+        element: <BlogDetail />,
       },
       {
         path: `/article`,

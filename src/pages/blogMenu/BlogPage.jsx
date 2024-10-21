@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../../hooks/useAxiosPublic";
 import FadeLoading from "../../components/loading/FadeLoading";
+import { Link } from "react-router-dom";
 
 const BlogPage = () => {
   const {
@@ -20,12 +21,12 @@ const BlogPage = () => {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className='w-[96%] mx-auto mt-20'>
-      <h2 className='text-3xl text-white t-shadow'>Blog Posts</h2>
+    <div className='w-[96%] mx-auto mt-24'>
+      <h2 className='text-3xl text-white text-center pt-10'>Blog Posts</h2>
 
-      <div className='mt-12 grid grid-cols-3 gap-6'>
+      <div className='mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6'>
         {blogs?.map((post) => (
-          <div key={post?.id} className='border'>
+          <Link to={`/blog/${post?._id}`} key={post?.id} className='border'>
             <img
               className='w-full h-60'
               src={post?.image}
@@ -40,7 +41,7 @@ const BlogPage = () => {
                 {post?.description.slice(0, 130)} ...
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
