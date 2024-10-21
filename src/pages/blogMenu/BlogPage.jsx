@@ -26,7 +26,7 @@ const BlogPage = () => {
 
       <div className='mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6'>
         {blogs?.map((post) => (
-          <Link to={`/blog/${post?._id}`} key={post?.id} className='border'>
+          <Link to={`/blog/${post?._id}`} key={post?._id} className='border'>
             <img
               className='w-full h-60'
               src={post?.image}
