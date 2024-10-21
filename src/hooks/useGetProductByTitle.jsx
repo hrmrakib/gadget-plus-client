@@ -2,11 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "./useAxiosPublic";
 
 const useGetProductByTitle = (title) => {
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["productTitle", title],
     queryFn: async () => {
       const res = await axiosPublic.get("/api/product-by-title", {
@@ -16,8 +12,7 @@ const useGetProductByTitle = (title) => {
     },
     // enabled: !!title,
   });
-  console.log(title);
-  return { product, isLoading, error };
+  return { data, isLoading, error };
 };
 
 export default useGetProductByTitle;

@@ -6,9 +6,11 @@ import { addToCart } from "../../features/cart/cartSlice";
 
 const BigDiscount = () => {
   const dispatch = useDispatch();
-  const { product, isLoading, error } = useGetProductByTitle(
-    "Apple iPhone 15 Pro"
-  );
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductByTitle("Apple iPhone 15 Pro");
 
   if (isLoading) return <FadeLoading />;
 
