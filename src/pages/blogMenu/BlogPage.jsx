@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../../hooks/useAxiosPublic";
-import FadeLoading from "../loading/FadeLoading";
+import FadeLoading from "../../components/loading/FadeLoading";
 
 const BlogPage = () => {
   const {
