@@ -4,8 +4,13 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../hooks/useAxiosPublic";
 import FadeLoading from "../components/loading/FadeLoading";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
+import { addToWishlist } from "../features/wishlist/wishlistSlice";
 
 const BestProductCollection = () => {
+  const dispatch = useDispatch();
+
   const {
     isPending,
     error,
@@ -52,7 +57,7 @@ const BestProductCollection = () => {
                 />
               </Link>
               <button
-                // onClick={() => handleAddToCard(product)}
+                onClick={() => dispatch(addToCart(product))}
                 className='w-full flex items-center justify-center gap-3 py-2 border border-gray-700 text-white hover:bg-blue-600 transition duration-50 ease-in-out'
               >
                 <FaPlus />
@@ -72,7 +77,7 @@ const BestProductCollection = () => {
             <hr />
             <div className='flex items-center justify-evenly mt-4 gap-5 *:text-blue-700 *:text-lg'>
               <AiOutlineHeart
-                // onClick={() => handleFavorite(product)}
+                onClick={() => dispatch(addToWishlist(product))}
                 className='text-lg cursor-pointer'
               />
               <Link to={`/product/${product?._id}`}>
