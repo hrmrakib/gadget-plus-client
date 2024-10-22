@@ -133,14 +133,12 @@ const Navbar = () => {
 
         {/* search, user, cart */}
         <div className='flex items-center gap-5 *:text-lg *:text-white'>
-          {/* TODO: Work later */}
-
-          {/* <div>
+          <div>
             <IoSearchOutline />
           </div>
           <div>
             <FaRegUser />
-          </div> */}
+          </div>
           <Link to={"/page/wishlist"} className='relative'>
             <FaRegHeart />
             <span
