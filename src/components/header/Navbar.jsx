@@ -136,9 +136,9 @@ const Navbar = () => {
           <div>
             <IoSearchOutline />
           </div>
-          <div>
+          <Link to={"/login"}>
             <FaRegUser />
-          </div>
+          </Link>
           <Link to={"/page/wishlist"} className='relative'>
             <FaRegHeart />
             <span

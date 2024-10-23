@@ -20,6 +20,8 @@ import TermAndCondition from "../pages/pageMenu/TermAndCondition";
 import ArticlePage from "../pages/blogMenu/ArticlePage";
 import BlogPage from "../pages/blogMenu/BlogPage";
 import BlogDetail from "../pages/blogMenu/BlogDetail";
+import SignupPage from "../pages/auth/SignUp";
+import LoginPage from "../pages/auth/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />,
       },
       {
         path: `/collection/:category`,
