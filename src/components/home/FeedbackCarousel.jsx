@@ -5,6 +5,10 @@ const FeedbackCarousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevious = () => {
+    if (currentIndex === 0) {
+      setCurrentIndex(items.length - 1);
+      return;
+    }
     const newIndex = currentIndex === items.length - 1 ? 0 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };

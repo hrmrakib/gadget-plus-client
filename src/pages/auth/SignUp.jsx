@@ -1,147 +1,206 @@
-import React, { useState } from "react";
-import { FaUser, FaEnvelope, FaLock, FaMobileAlt } from "react-icons/fa";
+import { FaRegEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { TiUserAddOutline } from "react-icons/ti";
+import { FaStarOfLife } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
+import { HiCheckBadge } from "react-icons/hi2";
+import { MdOutlineSecurity } from "react-icons/md";
 
-const SignupPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+const SignUp = () => {
+  const [viewPassword, setViewPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [anyError, setAnyError] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    // reset,
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically handle the signup logic
-    console.log("Form submitted:", formData);
-  };
+  const onSubmit = async () => {};
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-[#080808] text-white p-4'>
-      <div className='max-w-md w-full space-y-8'>
-        <div>
-          <h2 className='mt-6 text-center text-3xl font-extrabold'>
-            Create your account
-          </h2>
-          <p className='mt-2 text-center text-sm'>
-            Join the gadget revolution today!
-          </p>
-        </div>
-        <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
-          <div className='rounded-md shadow-sm space-y-4'>
-            <div>
-              <label htmlFor='name' className='sr-only'>
-                Name
-              </label>
-              <div className='relative'>
-                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                  <FaUser className='h-5 w-5 text-gray-400' />
-                </div>
-                <input
-                  id='name'
-                  name='name'
-                  type='text'
-                  required
-                  className='appearance-none bg-[#080808] rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='Full Name'
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-              </div>
+    <div className='bg-[#080808] bg-cover flex items-center min-h-screen'>
+      <div className='mt-32 w-[90%] mx-auto flex items-center justify-evenly'>
+        <div className='hidden lg:flex flex-col gap-10'>
+          <div className='mb-5'>
+            <div className='flex items-center gap-2'>
+              <FaStarOfLife className='text-[#E3E93D]' />
+              <h3 className='text-white'>Gadget Plus</h3>
             </div>
-            <div>
-              <label htmlFor='email' className='sr-only'>
-                Email address
-              </label>
-              <div className='relative'>
-                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                  <FaEnvelope className='h-5 w-5 text-gray-400' />
-                </div>
-                <input
-                  id='email'
-                  name='email'
-                  type='email'
-                  autoComplete='email'
-                  required
-                  className='appearance-none bg-[#080808] rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='Email address'
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='password' className='sr-only'>
-                Password
-              </label>
-              <div className='relative'>
-                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                  <FaLock className='h-5 w-5 text-gray-400' />
-                </div>
-                <input
-                  id='password'
-                  name='password'
-                  type='password'
-                  autoComplete='new-password'
-                  required
-                  className='appearance-none bg-[#080808] rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='Password'
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='confirmPassword' className='sr-only'>
-                Confirm Password
-              </label>
-              <div className='relative'>
-                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                  <FaLock className='h-5 w-5 text-gray-400' />
-                </div>
-                <input
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  type='password'
-                  autoComplete='new-password'
-                  required
-                  className='appearance-none bg-[#080808] rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='Confirm Password'
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <h2 className='text-white text-2xl font-semibold'>
+              Buying amazing gadget!
+            </h2>
           </div>
 
-          <div>
+          <div className='flex flex-col gap-2.5'>
+            <HiCheckBadge className='text-[#E3E93D] text-xl' />
+            <h3 className='text-white text-xl'>Ensure Compilance</h3>
+            <p className='text-white text-sm max-w-80'>
+              Intregrate with guaranted developer frinedly-APIs or openly choose
+              a build or low code solutions.
+            </p>
+          </div>
+          <div className='flex flex-col gap-2.5'>
+            <MdOutlineSecurity className='text-[#E3E93D] text-xl' />
+            <h3 className='text-white text-xl'>Built-in Security</h3>
+            <p className='text-white text-sm max-w-80'>
+              Intregrate with guaranted developer frinedly-APIs or openly choose
+              a build or low code solutions.
+            </p>
+          </div>
+
+          <ul className='flex items-center gap-5 *:text-blue-500 *:text-sm'>
+            <li>
+              <a href='#'>Terms</a>
+            </li>
+            <li>
+              <a href='#'>Privacy</a>
+            </li>
+            <li>
+              <a href='#'>Docs</a>
+            </li>
+            <li>
+              <a href='#'>Help</a>
+            </li>
+          </ul>
+        </div>
+        <div className='relative min-h-[calc(100vh-100px)] max-w-xl px-10 py-5 bg-[#080808] rounded-lg shadow'>
+          <div className='flex flex-col items-center justify-center mb-3'>
+            <h2 className='text-2xl font-semibold text-gray-100'>
+              Sign Up with
+            </h2>
+          </div>
+
+          {/* signup form */}
+          <form onSubmit={handleSubmit(onSubmit)} className='bg-[#080808]'>
+            <div className='mb-3'>
+              <label
+                htmlFor='name'
+                className='block mb-1 text-sm font-semibold text-white'
+              >
+                Full Name
+              </label>
+              <div className='flex items-center gap-1.5 shadow-sm bg-transparent border *:text-white text-sm rounded-lg w-full p-2.5'>
+                <TiUserAddOutline />
+                <input
+                  type='text'
+                  id='name'
+                  className='bg-transparent border-none outline-none'
+                  {...register("name", { required: true })}
+                  placeholder='John Doe'
+                />
+              </div>
+              {errors.name && (
+                <span className='text-red-600 font-medium'>
+                  Full name is required
+                </span>
+              )}
+            </div>
+
+            <div className='mb-4'>
+              <label
+                htmlFor='email'
+                className='block mb-1 text-sm font-semibold text-white'
+              >
+                Email address
+              </label>
+              <div className='flex items-center gap-1.5 shadow-sm bg-transparent border *:text-white text-sm rounded-lg w-full p-2.5'>
+                <TiUserAddOutline />
+                <input
+                  type='text'
+                  id='email'
+                  className='bg-transparent border-none outline-none'
+                  {...register("email", { required: true })}
+                  placeholder='name@example.com'
+                />
+              </div>
+              {errors.email && (
+                <span className='text-red-600 font-medium'>
+                  Email is required!
+                </span>
+              )}
+            </div>
+
+            <div className='relative mb-4'>
+              <label
+                htmlFor='password'
+                className='block mb-1 text-sm font-semibold text-white'
+              >
+                Password
+              </label>
+              <div className='flex items-center gap-1.5 shadow-sm bg-transparent border *:text-white text-sm rounded-lg w-full p-2.5'>
+                <TiUserAddOutline />
+                <input
+                  type={viewPassword ? "text" : "password"}
+                  id='password'
+                  className='bg-transparent border-none outline-none'
+                  {...register("password", { required: true })}
+                  placeholder='*******'
+                />
+              </div>
+              <p className='text-gray-100 mt-1'>
+                Minimum length is 6 characters
+              </p>
+              <span
+                onClick={() => setViewPassword(!viewPassword)}
+                className='absolute right-2 top-9'
+              >
+                {viewPassword ? (
+                  <FaRegEye className='cursor-pointer text-white' />
+                ) : (
+                  <FaEyeSlash className='cursor-pointer text-white' />
+                )}
+              </span>
+              {errors.password && (
+                <span className='text-red-600 font-medium'>
+                  Password is required!
+                </span>
+              )}
+            </div>
+            <div className='relative mb-4'>
+              <label
+                htmlFor='photo'
+                className='block mb-1 text-sm font-semibold text-white'
+              >
+                Photo
+              </label>
+              <div className='flex items-center gap-1.5 shadow-sm bg-transparent border *:text-white text-sm rounded-lg w-full p-2.5'>
+                <TiUserAddOutline />
+                <input
+                  type='file'
+                  id='photo'
+                  className='bg-transparent border-none outline-none'
+                  {...register("photo", { required: true })}
+                  placeholder='Photo'
+                />
+              </div>
+
+              {errors.photo && (
+                <span className='text-red-600 font-medium'>
+                  Photo is required!
+                </span>
+              )}
+            </div>
+
+            <p className='text-red-500 font-semibold my-1'>{anyError}</p>
+
             <button
               type='submit'
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              className='w-full text-white bg-blue-500 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm mt-2 px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 me-2 mb-2'
             >
-              <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
-                <FaMobileAlt className='h-5 w-5 text-indigo-500 group-hover:text-indigo-400' />
-              </span>
-              Sign up
+              <span className='w-max mx-auto'>SignIn</span>
             </button>
-          </div>
-        </form>
-        <div className='text-center'>
-          <p className='text-sm'>
-            Already have an account?{" "}
-            <Link
-              to={"/login"}
-              className='font-medium text-indigo-600 hover:text-indigo-500'
-            >
-              Log in
+          </form>
+
+          <p className='mt-2 text-white'>
+            Already have an account? Please
+            <Link to='/login' className='ml-2 font-bold underline'>
+              Sign In
             </Link>
           </p>
         </div>
@@ -149,4 +208,5 @@ const SignupPage = () => {
     </div>
   );
 };
-export default SignupPage;
+
+export default SignUp;
